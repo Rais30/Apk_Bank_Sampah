@@ -9,6 +9,7 @@ import Profil from '../Screen/Profil/profil';
 import Register from '../Screen/Register/register';
 import Splass from '../Screen/Splass/Splass';
 import Splash from '../Screen/Splass/Splash';
+import Edit from '../Screen/EditProfil/Edit';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -25,7 +26,7 @@ function Rumah() {
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home';
           } else if (route.name === 'Profil') {
-            iconName = focused ? 'user' : 'user';
+            iconName = focused ? 'account-box' : 'account-box';
           }
           return <Icon name={iconName} size={25} color={color} />;
         },
@@ -39,7 +40,7 @@ function Rumah() {
         name="Home"
         component={Home}
       />
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Home1" component={Home} />
       <Tab.Screen name="Profil" component={Profil} />
     </Tab.Navigator>
   );
@@ -59,8 +60,7 @@ class Navigation extends React.Component {
           <Stack.Screen name="Rumah" component={Rumah} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Profil" component={Profil} />
+          <Stack.Screen name="Edit" component={Edit} />
         </Stack.Navigator>
       </NavigationContainer>
     );

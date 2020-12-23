@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {Component} from 'react';
 import {
   Text,
@@ -6,6 +7,8 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  ActivityIndicator,
+  ToastAndroid,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../../Components/Login&Register/boxLogReg';
@@ -17,8 +20,48 @@ export class Login extends Component {
       lihat: true,
       email: '',
       password: '',
+      loading: false,
     };
   }
+  Masuk = () => {
+    const {email, password} = this.state;
+    const url = 'https://sammpah.herokuapp.com/api/login';
+    this.setState({loading: true});
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((resjson) => {
+        console.log(resjson);
+        const {token} = resjson;
+        if (token) {
+          ToastAndroid.show(
+            ' Anda Berasil Masuk',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+            // console.log(resJson),
+          );
+          AsyncStorage.setItem('token', token);
+          console.log(token);
+          this.setState({loading: false});
+          this.props.navigation.replace('Rumah');
+        } else if (resjson.error) {
+          alert(resjson.error);
+          this.setState({loading: false});
+        } else {
+          console.log(error);
+          this.setState({loading: false});
+        }
+      });
+  };
   Lihat = () => {
     this.setState({lihat: !this.state.lihat});
   };
@@ -35,10 +78,15 @@ export class Login extends Component {
         <View style={styles.box}>
           <View style={styles.inpuQu}>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <Icon name="account-circle" size={39} color="blue" />
+              <Icon name="mail" size={39} color="blue" />
             </View>
-            <View>
-              <TextInput placeholder="Email" />
+            <View style={styles.inputAja}>
+              <TextInput
+                placeholder="Email"
+                value={this.state.email}
+                keyboardType="email-address"
+                onChangeText={(text) => this.setState({email: text})}
+              />
             </View>
           </View>
           <View style={styles.inpuQu}>
@@ -46,7 +94,12 @@ export class Login extends Component {
               <Icon name="lock" size={39} color="red" />
             </View>
             <View style={styles.inputAja}>
-              <TextInput placeholder="Password" />
+              <TextInput
+                placeholder="Password"
+                value={this.state.password}
+                secureTextEntry={this.state.lihat}
+                onChangeText={(text) => this.setState({password: text})}
+              />
             </View>
             <View style={styles.iconQu}>
               <Icon
@@ -72,8 +125,14 @@ export class Login extends Component {
             </Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.tombolKlik}>
-          <Text style={styles.teksLogIn}>Masuk</Text>
+        <TouchableOpacity
+          style={styles.tombolKlik}
+          onPress={() => this.Masuk()}>
+          {this.state.loading ? (
+            <ActivityIndicator size={40} color="red" />
+          ) : (
+            <Text style={styles.teksLogIn}>Masuk</Text>
+          )}
         </TouchableOpacity>
       </ScrollView>
     );
