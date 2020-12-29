@@ -1,12 +1,88 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import styles from '../../Components/Profil/boxProfil';
 
 export class Profil extends Component {
+  constructor() {
+    super();
+    this.state = {
+      token: '',
+      dataKu: '',
+      loading: false,
+    };
+  }
+  Profil() {
+    const url = 'https://sammpah.herokuapp.com/api/profile';
+    this.setState({loading: true});
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        Accept: 'aplication/json',
+        'Content-Type': 'aplication/json',
+        Authorization: `Bearer ${this.state.token}`,
+      },
+    })
+      .then((respon) => respon.json())
+      .then((resJson) => {
+        this.setState({dataKu: resJson.data, loading: false});
+        console.log(resJson.data);
+      })
+      .catch((error) => {
+        console.log('error is' + error);
+        this.setState({loading: false});
+      });
+  }
+
+  componentDidMount() {
+    AsyncStorage.getItem('token').then((token) => {
+      if (token != null) {
+        this.setState({token: token});
+        this.Profil();
+      } else {
+        console.log('token tidak ada');
+      }
+    });
+  }
+
   render() {
     return (
-      <View>
-        <Text> textInComponent </Text>
-      </View>
+      <ScrollView style={styles.utama}>
+        {this.state.dataKu == null ? (
+          <ActivityIndicator size={50} color="red" />
+        ) : (
+          <View style={styles.loading}>
+            <View style={styles.dataDiri}>
+              <Image
+                source={{uri: this.state.dataKu.avatar}}
+                style={styles.gambar}
+              />
+
+              <View>
+                <View>
+                  <Text> {this.state.dataKu.name} </Text>
+                </View>
+                <View>
+                  <Text> {this.state.dataKu.email}</Text>
+                </View>
+                <View>
+                  <Text> {this.state.dataKu.phone_number}</Text>
+                </View>
+                <View>
+                  <Text> {this.state.dataKu.phone_number}</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        )}
+      </ScrollView>
     );
   }
 }
