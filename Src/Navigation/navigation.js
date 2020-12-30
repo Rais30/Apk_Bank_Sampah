@@ -40,7 +40,6 @@ function Rumah() {
         name="Home"
         component={Home}
       />
-      <Tab.Screen name="Home1" component={Home} />
       <Tab.Screen name="Profil" component={Profil} />
     </Tab.Navigator>
   );

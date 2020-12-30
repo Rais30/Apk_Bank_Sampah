@@ -18,5 +18,13 @@ export default StyleSheet.create({
     backgroundColor: 'blue',
     height: 170,
     width: 350,
+    marginTop: 90,
+    padding: 20,
+  },
+  bioKu: {
+    padding: 15,
+  },
+  teks: {
+    fontSize: 20,
   },
 });
