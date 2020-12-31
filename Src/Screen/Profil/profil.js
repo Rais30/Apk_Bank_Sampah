@@ -51,6 +51,10 @@ export class Profil extends Component {
       }
     });
   }
+  LogOut() {
+    AsyncStorage.clear();
+    this.props.navigation.replace('Splass');
+  }
 
   render() {
     return (
@@ -58,31 +62,54 @@ export class Profil extends Component {
         {this.state.dataKu == null ? (
           <ActivityIndicator size={50} color="red" />
         ) : (
-          <View style={styles.loading}>
-            <View style={styles.dataDiri}>
-              <Image
-                source={{uri: this.state.dataKu.avatar}}
-                style={styles.gambar}
-              />
+          <View>
+            <View style={styles.loading}>
+              <View style={styles.dataDiri}>
+                <Image
+                  source={{uri: this.state.dataKu.avatar}}
+                  style={styles.gambar}
+                />
 
-              <View style={styles.bioKu}>
-                <View>
-                  <Text style={styles.teks}> {this.state.dataKu.name} </Text>
-                </View>
-                <View>
-                  <Text style={styles.teks}> {this.state.dataKu.email}</Text>
-                </View>
-                <View>
-                  <Text style={styles.teks}>
-                    {this.state.dataKu.phone_number}
-                  </Text>
-                </View>
-                <View>
-                  <Text style={styles.teks}>
-                    {this.state.dataKu.phone_number}
-                  </Text>
+                <View style={styles.bioKu}>
+                  <View>
+                    <Text style={styles.teks}> {this.state.dataKu.name} </Text>
+                  </View>
+                  <View>
+                    <Text style={styles.teks}> {this.state.dataKu.email}</Text>
+                  </View>
+                  <View>
+                    <Text style={styles.teks}>
+                      {this.state.dataKu.phone_number}
+                    </Text>
+                  </View>
+                  <View>
+                    <Text style={styles.teks}>
+                      {this.state.dataKu.phone_number}
+                    </Text>
+                  </View>
                 </View>
               </View>
+            </View>
+            <View>
+              <View style={styles.styleProfil}>
+                <Text style={{fontSize: 20}}> Ubah Sandi </Text>
+              </View>
+              <View style={styles.styleProfil}>
+                <Text style={{fontSize: 20}}> History Penjemputan</Text>
+              </View>
+              <View style={styles.styleProfil}>
+                <Text style={{fontSize: 20}}> Edit Profil </Text>
+              </View>
+              <View style={styles.styleProfil}>
+                <Text style={{fontSize: 20}}> Ubah Sandi </Text>
+              </View>
+            </View>
+            <View>
+              <TouchableOpacity
+                onPress={() => this.LogOut()}
+                style={styles.keluar}>
+                <Text style={{fontSize: 30}}> Log Out </Text>
+              </TouchableOpacity>
             </View>
           </View>
         )}

@@ -20,25 +20,17 @@ export class Register extends Component {
       name: '',
       email: '',
       password: '',
-      password_confirmation: '',
       phone_number: '',
       loading: false,
     };
   }
   Daftar = () => {
-    const {
-      name,
-      email,
-      password,
-      password_confirmation,
-      phone_number,
-    } = this.state;
+    const {name, email, password, phone_number} = this.state;
     const url = 'https://sammpah.herokuapp.com/api/register';
     const data = {
       name: name,
       email: email,
       password: password,
-      password_confirmation: password_confirmation,
       phone_number: phone_number,
     };
     this.setState({loading: true});
@@ -133,21 +125,7 @@ export class Register extends Component {
               />
             </View>
           </View>
-          <View style={styles.inpuQu}>
-            <View style={styles.iconQu}>
-              <Icon name="lock" size={39} color="red" />
-            </View>
-            <View style={styles.inputAja}>
-              <TextInput
-                placeholder="Tulis Ulang Password"
-                value={this.state.password_convirmation}
-                onChangeText={(text) =>
-                  this.setState({password_confirmation: text})
-                }
-                secureTextEntry={this.state.lihat}
-              />
-            </View>
-          </View>
+
           <View style={styles.inpuQu}>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
               <Icon name="call" size={39} color="blue" />

@@ -16,15 +16,32 @@ export default StyleSheet.create({
   dataDiri: {
     flexDirection: 'row',
     backgroundColor: 'blue',
-    height: 170,
-    width: 350,
-    marginTop: 90,
+    height: 160,
+    width: '90%',
+    marginTop: 30,
     padding: 20,
+    borderRadius: 15,
   },
   bioKu: {
     padding: 15,
   },
   teks: {
     fontSize: 20,
+  },
+  keluar: {
+    backgroundColor: 'red',
+    alignItems: 'center',
+    width: 150,
+    height: 40,
+    alignSelf: 'center',
+    borderRadius: 10,
+    justifyContent: 'center',
+  },
+  styleProfil: {
+    margin: 25,
+    borderBottomWidth: 1,
+    justifyContent: 'center',
+    padding: 5,
+    // alignItems: 'center',
   },
 });

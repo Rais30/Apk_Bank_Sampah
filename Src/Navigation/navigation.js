@@ -10,6 +10,7 @@ import Register from '../Screen/Register/register';
 import Splass from '../Screen/Splass/Splass';
 import Splash from '../Screen/Splass/Splash';
 import Edit from '../Screen/EditProfil/Edit';
+import History from '../Screen/History/History';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -60,6 +61,7 @@ class Navigation extends React.Component {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Edit" component={Edit} />
+          <Stack.Screen name="History" component={History} />
         </Stack.Navigator>
       </NavigationContainer>
     );
