@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, ScrollView} from 'react-native';
+
+import styles from '../../Components/Home/BoxHome';
 
 export class Home extends Component {
   render() {
     return (
-      <View>
-        <Text> textInComponent </Text>
-      </View>
+      <ScrollView stye={styles.utama}>
+        <View>
+          
+        </View>
+      </ScrollView>
     );
   }
 }

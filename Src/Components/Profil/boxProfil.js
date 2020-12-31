@@ -11,7 +11,7 @@ export default StyleSheet.create({
     width: 100,
     height: 100,
     backgroundColor: 'red',
-    borderRadius: 20,
+    borderRadius: 49,
   },
   dataDiri: {
     flexDirection: 'row',

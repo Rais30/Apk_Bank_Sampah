@@ -53,7 +53,7 @@ export class Profil extends Component {
   }
   LogOut() {
     AsyncStorage.clear();
-    this.props.navigation.replace('Splass');
+    this.props.navigation.replace('Splas');
   }
 
   render() {
