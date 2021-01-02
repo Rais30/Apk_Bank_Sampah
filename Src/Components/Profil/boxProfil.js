@@ -15,7 +15,7 @@ export default StyleSheet.create({
   },
   dataDiri: {
     flexDirection: 'row',
-    backgroundColor: 'blue',
+    backgroundColor: 'white',
     height: 160,
     width: '90%',
     marginTop: 30,

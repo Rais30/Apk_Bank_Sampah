@@ -41,6 +41,16 @@ export class Profil extends Component {
       });
   }
 
+  roleId(role) {
+    if (role == '1') {
+      return <Text> Nasabah </Text>;
+    } else if (role == '2') {
+      return <Text> Pengurus 1 </Text>;
+    } else if (role == '3') {
+      return <Text> Pengurus 2 </Text>;
+    }
+  }
+
   componentDidMount() {
     AsyncStorage.getItem('token').then((token) => {
       if (token != null) {
@@ -82,27 +92,33 @@ export class Profil extends Component {
                       {this.state.dataKu.phone_number}
                     </Text>
                   </View>
-                  <View>
-                    <Text style={styles.teks}>
-                      {this.state.dataKu.phone_number}
-                    </Text>
-                  </View>
+                  <View>{this.roleId(this.state.dataKu.role_id)}</View>
                 </View>
               </View>
             </View>
             <View>
-              <View style={styles.styleProfil}>
-                <Text style={{fontSize: 20}}> Ubah Sandi </Text>
-              </View>
-              <View style={styles.styleProfil}>
-                <Text style={{fontSize: 20}}> History Penjemputan</Text>
-              </View>
-              <View style={styles.styleProfil}>
-                <Text style={{fontSize: 20}}> Edit Profil </Text>
-              </View>
-              <View style={styles.styleProfil}>
-                <Text style={{fontSize: 20}}> Ubah Sandi </Text>
-              </View>
+              <TouchableOpacity style={styles.styleProfil}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                  Ubah Sandi
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.styleProfil}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                  History Penjemputan
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Edit')}
+                style={styles.styleProfil}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                  Edit Profil
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.styleProfil}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                  Ubah Sandi
+                </Text>
+              </TouchableOpacity>
             </View>
             <View>
               <TouchableOpacity
