@@ -11,13 +11,14 @@ import {
 import styles from '../../Components/EditProfile/editProfil';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {launchImageLibrary} from 'react-native-image-picker';
+
 export class EditProfile extends Component {
   constructor() {
     super();
     this.state = {
       name: '',
-      nomer: '',
-      foto: '',
+      phone_number: '',
+      avatar: '',
       loading: false,
       token: '',
     };
@@ -26,7 +27,7 @@ export class EditProfile extends Component {
   createFormData = (photo, body) => {
     const data = new FormData();
 
-    data.append('foto', {
+    data.append('avatar', {
       name: photo.fileName,
       type: photo.type,
       uri:
@@ -48,7 +49,7 @@ export class EditProfile extends Component {
     };
     launchImageLibrary(options, (response) => {
       if (response.uri) {
-        this.setState({foto: response});
+        this.setState({avatar: response});
       }
     });
   };
@@ -67,20 +68,69 @@ export class EditProfile extends Component {
   }
 
   EditProfil = () => {
-    const {password, password_confirmation, alamat, nomer, foto} = this.state;
+    const {name, phone_number, avatar} = this.state;
+    const url = 'https://api-shop1.herokuapp.com/api/update';
+    const data = {
+      name: name,
+      phone_number: phone_number,
+    };
+    this.setState({loading: true});
+
+    fetch(url, {
+      method: 'POST',
+      body: this.createFormData(avatar, data),
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.state.token}`,
+      },
+    })
+      .then((respon) => respon.json())
+      .then((resJson) => {
+        console.log(resJson);
+        const {status} = resJson;
+        if (status == 'success') {
+          ToastAndroid.show(
+            ' Berasil',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+            console.log(resJson),
+            this.props.navigation.replace('Home', {screan: 'Profil'}),
+          );
+          this.setState({loading: false});
+          this.props.navigation.navigate('Home');
+        } else {
+          this.setState({loading: false});
+          console.log('error');
+          alert('error');
+        }
+      })
+      .catch((error) => {
+        this.setState({loading: false});
+        console.log('error is' + error);
+      });
+  };
+
+  EditProfil = () => {
+    const {
+      password,
+      password_confirmation,
+      alamat,
+      phone_number,
+      avatar,
+    } = this.state;
     const url = 'https://api-shop1.herokuapp.com/api/update';
     const data = {
       password: password,
       password_confirmation: password_confirmation,
       alamat: alamat,
-      nomer: nomer,
+      phone_number: phone_number,
       _method: 'PUT',
     };
     this.setState({loading: true});
 
     fetch(url, {
       method: 'POST',
-      body: this.createFormData(foto, data),
+      body: this.createFormData(avatar, data),
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${this.state.token}`,
@@ -119,13 +169,13 @@ export class EditProfile extends Component {
           <TouchableOpacity
             style={styles.Avatar}
             onPress={() => this.handleChoosePhoto()}>
-            {this.state.foto !== '' ? (
+            {this.state.avatar !== '' ? (
               <Image
                 style={styles.Avatar}
-                source={{uri: this.state.foto.uri}}
+                source={{uri: this.state.avatar.uri}}
               />
             ) : (
-              <Text> Foto </Text>
+              <Text> avatar </Text>
             )}
           </TouchableOpacity>
 
@@ -144,9 +194,9 @@ export class EditProfile extends Component {
             <View>
               <TextInput
                 placeholder="No Telefon"
-                value={this.state.nomer}
+                value={this.state.phone_number}
                 keyboardType="number-pad"
-                onChangeText={(text) => this.setState({nomer: text})}
+                onChangeText={(text) => this.setState({phone_number: text})}
               />
             </View>
           </View>
