@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   ActivityIndicator,
+  ToastAndroid,
 } from 'react-native';
 import styles from '../../Components/EditProfile/editProfil';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -56,9 +57,10 @@ export class EditProfile extends Component {
 
   componentDidMount() {
     AsyncStorage.getItem('token')
-      .then((value) => {
-        if (value != '') {
+      .then((token) => {
+        if (token != null) {
           this.setState({token: token});
+          // console.log(this.state.token);
           // console.log(this.state.data);
         } else {
           console.log('token tidak ada');
@@ -68,13 +70,16 @@ export class EditProfile extends Component {
   }
 
   EditProfil = () => {
+    // console.log(this.state.token);
+
     const {name, phone_number, avatar} = this.state;
-    const url = 'https://api-shop1.herokuapp.com/api/update';
+    const url = 'https://sammpah.herokuapp.com/api/profile';
     const data = {
       name: name,
       phone_number: phone_number,
     };
     this.setState({loading: true});
+    // console.log(this.state.token);
 
     fetch(url, {
       method: 'POST',
@@ -88,68 +93,16 @@ export class EditProfile extends Component {
       .then((resJson) => {
         console.log(resJson);
         const {status} = resJson;
-        if (status == 'success') {
+        if (status == 'Success') {
           ToastAndroid.show(
-            ' Berasil',
+            ' Berhasil',
             ToastAndroid.SHORT,
             ToastAndroid.CENTER,
             console.log(resJson),
-            this.props.navigation.replace('Home', {screan: 'Profil'}),
+            this.props.navigation.replace('Rumah', {screen: 'Profil'}),
           );
           this.setState({loading: false});
-          this.props.navigation.navigate('Home');
-        } else {
-          this.setState({loading: false});
-          console.log('error');
-          alert('error');
-        }
-      })
-      .catch((error) => {
-        this.setState({loading: false});
-        console.log('error is' + error);
-      });
-  };
-
-  EditProfil = () => {
-    const {
-      password,
-      password_confirmation,
-      alamat,
-      phone_number,
-      avatar,
-    } = this.state;
-    const url = 'https://api-shop1.herokuapp.com/api/update';
-    const data = {
-      password: password,
-      password_confirmation: password_confirmation,
-      alamat: alamat,
-      phone_number: phone_number,
-      _method: 'PUT',
-    };
-    this.setState({loading: true});
-
-    fetch(url, {
-      method: 'POST',
-      body: this.createFormData(avatar, data),
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${this.state.token}`,
-      },
-    })
-      .then((respon) => respon.json())
-      .then((resJson) => {
-        console.log(resJson);
-        const {status} = resJson;
-        if (status == 'success') {
-          ToastAndroid.show(
-            ' Berasil',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
-            console.log(resJson),
-            this.props.navigation.replace('rumah', {screan: 'Profil'}),
-          );
-          this.setState({loading: false});
-          this.props.navigation.navigate('rumah');
+          // this.props.navigation.navigate('Home');
         } else {
           this.setState({loading: false});
           console.log('error');
@@ -165,6 +118,9 @@ export class EditProfile extends Component {
   render() {
     return (
       <View style={styles.utama}>
+        <View style={styles.head}>
+          <Text style={{fontSize: 37}}> Ubah Profile</Text>
+        </View>
         <ScrollView>
           <TouchableOpacity
             style={styles.Avatar}
@@ -175,23 +131,22 @@ export class EditProfile extends Component {
                 source={{uri: this.state.avatar.uri}}
               />
             ) : (
-              <Text> avatar </Text>
+              <Text> foto </Text>
             )}
           </TouchableOpacity>
 
           <View>
-            <View>
+            <View style={styles.boxInpur}>
               <TextInput
+                style={styles.teksInput}
                 placeholder="Nama"
-                value={this.state.password_confirmation}
+                value={this.state.name}
                 secureTextEntry={this.state.visibel}
-                onChangeText={(text) =>
-                  this.setState({password_confirmation: text})
-                }
+                onChangeText={(text) => this.setState({name: text})}
               />
             </View>
 
-            <View>
+            <View style={styles.boxInpur}>
               <TextInput
                 placeholder="No Telefon"
                 value={this.state.phone_number}
@@ -200,11 +155,13 @@ export class EditProfile extends Component {
               />
             </View>
           </View>
-          <TouchableOpacity onPress={() => this.EditProfil()}>
+          <TouchableOpacity
+            onPress={() => this.EditProfil()}
+            style={styles.tombol}>
             {this.state.loading ? (
               <ActivityIndicator size={25} color="red" />
             ) : (
-              <Text> Ubah Profil</Text>
+              <Text style={{fontSize: 30}}> Simpan </Text>
             )}
           </TouchableOpacity>
         </ScrollView>

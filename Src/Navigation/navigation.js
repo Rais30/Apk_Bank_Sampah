@@ -11,6 +11,7 @@ import Splass from '../Screen/Splass/Splass';
 import Splash from '../Screen/Splass/Splash';
 import EditProfile from '../Screen/EditProfil/Edit';
 import History from '../Screen/History/History';
+import EditPass from '../Screen/EditPassword/EditPass';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -62,6 +63,7 @@ class Navigation extends React.Component {
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Edit" component={EditProfile} />
           <Stack.Screen name="History" component={History} />
+          <Stack.Screen name="EditPass" component={EditPass} />
         </Stack.Navigator>
       </NavigationContainer>
     );

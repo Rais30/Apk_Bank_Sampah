@@ -55,6 +55,7 @@ export class Profil extends Component {
     AsyncStorage.getItem('token').then((token) => {
       if (token != null) {
         this.setState({token: token});
+        console.log(this.state.token);
         this.Profil();
       } else {
         console.log('token tidak ada');
@@ -97,7 +98,9 @@ export class Profil extends Component {
               </View>
             </View>
             <View>
-              <TouchableOpacity style={styles.styleProfil}>
+              <TouchableOpacity
+                style={styles.styleProfil}
+                onPress={() => this.props.navigation.navigate('EditPass')}>
                 <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                   Ubah Sandi
                 </Text>
