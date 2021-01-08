@@ -22,6 +22,7 @@ function Rumah() {
       initialRouteName="Belanja"
       shifting={true}
       screenOptions={({route}) => ({
+        tabBarColor: '#388e3c',
         tabBarIcon: ({focused, color}) => {
           let iconName;
 

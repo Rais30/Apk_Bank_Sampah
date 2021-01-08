@@ -6,6 +6,7 @@ import {
   TextInput,
   ActivityIndicator,
   ToastAndroid,
+  ScrollView,
 } from 'react-native';
 import styles from '../../Components/EditProfile/editProfil';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -45,7 +46,7 @@ export class EditPass extends Component {
 
     fetch(url, {
       method: 'POST',
-      body: data,
+      body: JSON.stringify(data),
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${this.state.token}`,
@@ -73,66 +74,78 @@ export class EditPass extends Component {
       })
       .catch((error) => {
         this.setState({loading: false});
-        console.log('error is' + error);
+        console.log('error nya adalah ' + error);
       });
   };
   Lihat = () => {
     this.setState({lihat: !this.state.lihat});
   };
   Lihat1 = () => {
-    this.setState({lihat: !this.state.lihat1});
+    this.setState({lihat1: !this.state.lihat1});
   };
   render() {
     return (
       <View style={styles.utama}>
         <View style={{...styles.head, marginBottom: 50}}>
-          <Text style={{fontSize: 35}}> Ubah Pasword</Text>
+          <Text style={{fontSize: 35}}> Ubah Password</Text>
         </View>
+        <ScrollView>
+          <View style={styles.box}>
+            <View style={{flexDirection: 'row'}}>
+              <View
+                style={{
+                  ...styles.boxInpur,
+                  marginBottom: 20,
+                }}>
+                <TextInput
+                  style={styles.teksInput}
+                  placeholder="Password Lama"
+                  value={this.state.password}
+                  secureTextEntry={this.state.lihat}
+                  onChangeText={(text) => this.setState({password: text})}
+                />
 
-        <View>
-          <View style={{...styles.boxInpur, marginBottom: 20}}>
-            <TextInput
-              style={styles.teksInput}
-              placeholder="Password Lama"
-              value={this.state.password}
-              secureTextEntry={this.state.lihat}
-              onChangeText={(text) => this.setState({password: text})}
-            />
+                <Icon
+                  style={styles.aikon}
+                  name="visibility"
+                  size={35}
+                  // color="red"
+                  onPress={() => this.Lihat()}
+                />
+              </View>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.boxInpur}>
+                <TextInput
+                  style={styles.teksInput}
+                  placeholder=" Password Baru"
+                  value={this.state.password_change}
+                  secureTextEntry={this.state.lihat1}
+                  onChangeText={(text) =>
+                    this.setState({password_change: text})
+                  }
+                />
+
+                <Icon
+                  style={styles.aikon}
+                  name="visibility"
+                  size={35}
+                  // color="red"
+                  onPress={() => this.Lihat1()}
+                />
+              </View>
+            </View>
           </View>
-          <View>
-            <Icon
-              name="visibility"
-              size={35}
-              // color="red"
-              onPress={() => this.Lihat()}
-            />
+          <View style={styles.tombol}>
+            <TouchableOpacity onPress={() => this.EditProfil()}>
+              {this.state.loading ? (
+                <ActivityIndicator size={25} color="red" />
+              ) : (
+                <Text style={{fontSize: 35}}> Simpan</Text>
+              )}
+            </TouchableOpacity>
           </View>
-          <View style={styles.boxInpur}>
-            <TextInput
-              placeholder=" Password Baru"
-              value={this.state.password_change}
-              secureTextEntry={this.state.lihat1}
-              onChangeText={(text) => this.setState({password_change: text})}
-            />
-          </View>
-          <View>
-            <Icon
-              name="visibility"
-              size={35}
-              // color="red"
-              onPress={() => this.Lihat1()}
-            />
-          </View>
-        </View>
-        <View style={styles.tombol}>
-          <TouchableOpacity onPress={() => this.EditProfil()}>
-            {this.state.loading ? (
-              <ActivityIndicator size={25} color="red" />
-            ) : (
-              <Text style={{fontSize: 35}}> Simpan</Text>
-            )}
-          </TouchableOpacity>
-        </View>
+        </ScrollView>
       </View>
     );
   }

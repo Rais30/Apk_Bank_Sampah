@@ -97,7 +97,7 @@ export class Profil extends Component {
                 </View>
               </View>
             </View>
-            <View>
+            <View style={styles.boxSetting}>
               <TouchableOpacity
                 style={styles.styleProfil}
                 onPress={() => this.props.navigation.navigate('EditPass')}>
