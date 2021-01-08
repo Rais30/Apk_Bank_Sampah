@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {Text, View, ScrollView, Image} from 'react-native';
+import {
+  Text,
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../../Components/Home/BoxHome';
 
@@ -58,24 +65,36 @@ export class Home extends Component {
               </View>
             </View>
             <ScrollView horizontal={true}>
-              <View style={styles.boxFitur}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Setor')}
+                style={styles.boxFitur}>
                 <Text>setor sampah</Text>
-              </View>
-              <View style={styles.boxFitur}>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Penjemputan')}
+                style={styles.boxFitur}>
                 <Text>penjemputan sampah</Text>
-              </View>
-              <View style={styles.boxFitur}>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Tabungan')}
+                style={styles.boxFitur}>
                 <Text>buku tabungan</Text>
-              </View>
-              <View style={styles.boxFitur}>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('TarikSaldo')}
+                style={styles.boxFitur}>
                 <Text>penaria saldo</Text>
-              </View>
-              <View style={styles.boxFitur}>
-                <Text>penaria saldo</Text>
-              </View>
-              <View style={styles.boxFitur}>
-                <Text>penaria saldo</Text>
-              </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('SetokSampah')}
+                style={styles.boxFitur}>
+                <Text>Sampah</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('HistorySaldo')}
+                style={styles.boxFitur}>
+                <Text>Riwanyat saldo</Text>
+              </TouchableOpacity>
             </ScrollView>
           </View>
         </ScrollView>

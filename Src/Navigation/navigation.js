@@ -12,6 +12,12 @@ import Splash from '../Screen/Splass/Splash';
 import EditProfile from '../Screen/EditProfil/Edit';
 import History from '../Screen/History/History';
 import EditPass from '../Screen/EditPassword/EditPass';
+import Setor from '../Screen/SetorSampah/Setor';
+import Penjemputan from '../Screen/Penjemputan/Penjemputan';
+import Tabungan from '../Screen/BukuTabungan/Tabungan';
+import TarikSaldo from '../Screen/PenarikanSaldo/TarikSaldo';
+import Setok from '../Screen/SampahGudang/Setok';
+import HistorySaldo from '../Screen/HistoryPenatikan/HIstorySaldo';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -65,6 +71,12 @@ class Navigation extends React.Component {
           <Stack.Screen name="Edit" component={EditProfile} />
           <Stack.Screen name="History" component={History} />
           <Stack.Screen name="EditPass" component={EditPass} />
+          <Stack.Screen name="Setor" component={Setor} />
+          <Stack.Screen name="Penjemputan" component={Penjemputan} />
+          <Stack.Screen name="Tabungan" component={Tabungan} />
+          <Stack.Screen name="TarikSaldo" component={TarikSaldo} />
+          <Stack.Screen name="SetokSampah" component={Setok} />
+          <Stack.Screen name="HistorySaldo" component={HistorySaldo} />
         </Stack.Navigator>
       </NavigationContainer>
     );
