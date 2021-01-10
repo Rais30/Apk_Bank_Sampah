@@ -52,7 +52,7 @@ export class Login extends Component {
           AsyncStorage.setItem('token', token);
           console.log(token);
           this.setState({loading: false});
-          this.props.navigation.replace('Rumah');
+          this.props.navigation.replace('Rumah', {screen: 'HomeOne'});
         } else if (resjson.error) {
           alert(resjson.error);
           this.setState({loading: false});

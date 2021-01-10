@@ -1,8 +1,10 @@
 import * as React from 'react';
+import {Button, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+// import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+// import Icon from 'react-native-vector-icons/MaterialIcons';
 import Home from '../Screen/Home/home';
 import Login from '../Screen/LogIn/login';
 import Profil from '../Screen/Profil/profil';
@@ -17,40 +19,19 @@ import Penjemputan from '../Screen/Penjemputan/Penjemputan';
 import Tabungan from '../Screen/BukuTabungan/Tabungan';
 import TarikSaldo from '../Screen/PenarikanSaldo/TarikSaldo';
 import Setok from '../Screen/SampahGudang/Setok';
-import HistorySaldo from '../Screen/HistoryPenatikan/HIstorySaldo';
+import HistorySaldo from '../Screen/HistoryPenarikan/HistorySaldo';
 
-const Tab = createMaterialBottomTabNavigator();
+// const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 function Rumah() {
   return (
-    <Tab.Navigator
-      initialRouteName="Belanja"
-      shifting={true}
-      screenOptions={({route}) => ({
-        tabBarColor: '#388e3c',
-        tabBarIcon: ({focused, color}) => {
-          let iconName;
-
-          if (route.name === 'Home') {
-            iconName = focused ? 'home' : 'home';
-          } else if (route.name === 'Profil') {
-            iconName = focused ? 'account-box' : 'account-box';
-          }
-          return <Icon name={iconName} size={25} color={color} />;
-        },
-      })}>
-      <Tab.Screen
-        tabBarIcon={{
-          activeTintColor: '#fcf8f8',
-          inactiveTintColor: 'gray',
-          showLabel: false,
-        }}
-        name="Home"
-        component={Home}
-      />
-      <Tab.Screen name="Profil" component={Profil} />
-    </Tab.Navigator>
+    <Drawer.Navigator
+      initialRouteName="HomeOne"
+      drawerContent={(props) => <Profil {...props} />}>
+      <Drawer.Screen name="HomeOne" component={Home} />
+    </Drawer.Navigator>
   );
 }
 
@@ -77,6 +58,8 @@ class Navigation extends React.Component {
           <Stack.Screen name="TarikSaldo" component={TarikSaldo} />
           <Stack.Screen name="SetokSampah" component={Setok} />
           <Stack.Screen name="HistorySaldo" component={HistorySaldo} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Profil" component={Profil} />
         </Stack.Navigator>
       </NavigationContainer>
     );

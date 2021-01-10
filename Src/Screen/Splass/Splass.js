@@ -20,7 +20,7 @@ export class Splass extends Component {
   componentDidMount() {
     setTimeout(() => {
       if (this.state.token != '') {
-        this.props.navigation.replace('Rumah');
+        this.props.navigation.replace('Rumah', {screen: 'HomeOne'});
       } else {
         this.props.navigation.replace('Splash');
       }

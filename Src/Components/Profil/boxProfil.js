@@ -9,13 +9,13 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   gambar: {
-    width: 100,
-    height: 100,
+    width: 70,
+    height: 70,
     backgroundColor: '#00701a',
-    borderRadius: 49,
+    borderRadius: 35,
   },
   dataDiri: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     backgroundColor: '#80e27e',
     // height: 160,
     width: '95%',
