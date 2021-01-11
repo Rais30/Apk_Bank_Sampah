@@ -25,15 +25,6 @@ export class EditPass extends Component {
       visibel: true,
     };
   }
-  componentDidMount() {
-    AsyncStorage.getItem('token').then((token) => {
-      if (token != null) {
-        this.setState({token: token});
-      } else {
-        console.log('token tidak ada');
-      }
-    });
-  }
 
   EditProfil = () => {
     const {password, password_change} = this.state;
@@ -49,6 +40,7 @@ export class EditPass extends Component {
       body: JSON.stringify(data),
       headers: {
         Accept: 'application/json',
+        'Content Type': 'application/json',
         Authorization: `Bearer ${this.state.token}`,
       },
     })
@@ -77,6 +69,19 @@ export class EditPass extends Component {
         console.log('error nya adalah ' + error);
       });
   };
+  componentDidMount() {
+    AsyncStorage.getItem('token')
+      .then((token) => {
+        if (token != null) {
+          this.setState({token: token});
+          // console.log(this.state.token);
+          // console.log(this.state.data);
+        } else {
+          console.log('token tidak ada');
+        }
+      })
+      .catch((err) => console.log(err));
+  }
   Lihat = () => {
     this.setState({lihat: !this.state.lihat});
   };
@@ -100,7 +105,7 @@ export class EditPass extends Component {
                 <TextInput
                   style={styles.teksInput}
                   placeholder="Password Lama"
-                  value={this.state.password}
+                  // value={this.state.password}
                   secureTextEntry={this.state.lihat}
                   onChangeText={(text) => this.setState({password: text})}
                 />
@@ -119,7 +124,7 @@ export class EditPass extends Component {
                 <TextInput
                   style={styles.teksInput}
                   placeholder=" Password Baru"
-                  value={this.state.password_change}
+                  // value={this.state.password_change}
                   secureTextEntry={this.state.lihat1}
                   onChangeText={(text) =>
                     this.setState({password_change: text})
