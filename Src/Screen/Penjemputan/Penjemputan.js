@@ -7,13 +7,13 @@ import {
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
+  Linking,
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
-import Geolocation from '@react-native-community/geolocation';
 import styles from '../../Components/BoxSetor/boxSetor';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {launchCamera} from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import Geolocation from 'react-native-geolocation-service';
 export class Penjemputan extends Component {
   constructor() {
     super();
@@ -24,12 +24,15 @@ export class Penjemputan extends Component {
       token: '',
       image: '',
       loading: false,
+      latitude: '',
+      longitude: '',
     };
   }
+
   EditProfil = () => {
     // console.log(this.state.token);
 
-    const {name, phone_number, avatar} = this.state;
+    const {name, phone_number, image} = this.state;
     const url = 'https://sammpah.herokuapp.com/api/profile';
     const data = {
       name: name,
@@ -40,7 +43,7 @@ export class Penjemputan extends Component {
 
     fetch(url, {
       method: 'POST',
-      body: this.createFormData(avatar, data),
+      body: this.createFormData(image, data),
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${this.state.token}`,
@@ -71,6 +74,35 @@ export class Penjemputan extends Component {
         console.log('error is' + error);
       });
   };
+  createFormData = (photo, body) => {
+    const data = new FormData();
+
+    data.append('image', {
+      name: photo.fileName,
+      type: photo.type,
+      uri:
+        Platform.OS === 'android'
+          ? photo.uri
+          : photo.uri.replace('file://', ''),
+    });
+
+    Object.keys(body).forEach((key) => {
+      data.append(key, body[key]);
+    });
+
+    return data;
+  };
+
+  handleChoosePhoto = () => {
+    const options = {
+      noData: true,
+    };
+    launchCamera(options, (response) => {
+      if (response.uri) {
+        this.setState({image: response});
+      }
+    });
+  };
   componentDidMount() {
     AsyncStorage.getItem('token')
       .then((token) => {
@@ -81,7 +113,23 @@ export class Penjemputan extends Component {
         }
       })
       .catch((err) => console.log(err));
+
+    Geolocation.getCurrentPosition(
+      (position) => {
+        console.log(position);
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      (error) => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+    );
   }
+
   render() {
     return (
       <View style={styles.urama}>
@@ -89,24 +137,46 @@ export class Penjemputan extends Component {
           <Text style={styles.title}> Penyetoran Sampah </Text>
         </View>
         <ScrollView>
-          <View>
-            <View>
+          <View style={styles.boxInput}>
+            <TouchableOpacity style={styles.image}>
+              <Image />
+            </TouchableOpacity>
+            <View style={styles.Input}>
+              <TextInput
+                placeholder="Nama"
+                onChangeText={(text) => this.setState({address: text})}
+              />
+            </View>
+            <View style={styles.Input}>
+              <TextInput />
+            </View>
+            <View style={styles.Input}>
               <TextInput />
             </View>
             <View>
-              <MapView
-                region={{
-                  latitude: 37.78825,
-                  longitude: -122.4324,
-                  latitudeDelta: 0.015,
-                  longitudeDelta: 0.0121,
-                }}
-                showsUserLocation
-                showsMyLocationButton
-                provider={PROVIDER_GOOGLE}
-                style={{height: '100%'}}></MapView>
+              {this.state.longitude == '' ? (
+                <ActivityIndicator size={50} color="red" />
+              ) : (
+                <MapView
+                  region={{
+                    latitude: this.state.latitude,
+                    longitude: this.state.longitude,
+                    latitudeDelta: 0.015,
+                    longitudeDelta: 0.0121,
+                  }}
+                  showsUserLocation
+                  showsMyLocationButton
+                  provider={PROVIDER_GOOGLE}
+                  style={{height: 350, width: 350}}></MapView>
+              )}
+            </View>
+            <View style={{...styles.Input, height: 75}}>
+              <Text> </Text>
             </View>
           </View>
+          <TouchableOpacity style={styles.klik}>
+            <Text style={{fontSize: 40, color: 'white'}}> Setor </Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     );
