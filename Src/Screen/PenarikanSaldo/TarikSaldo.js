@@ -1,11 +1,32 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicatorBase,
+  ScrollView,
+} from 'react-native';
+import styles from '../../Components/Tabungan/BoxTabungan';
 
 export class TarikSaldo extends Component {
+  constructor() {
+    super();
+    this.state = {
+      token: '',
+      loading: false,
+      nama: '',
+      rekening: '',
+      nominal: '',
+    };
+  }
+
   render() {
     return (
-      <View>
-        <Text> Penatikan Saldo </Text>
+      <View style={styles.Utama}>
+        <View style={styles.headers}>
+          <Text style={{fontSize: 30, color: 'white'}}> Penarikan Saldo </Text>
+        </View>
       </View>
     );
   }
