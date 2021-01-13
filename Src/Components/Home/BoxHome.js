@@ -43,14 +43,26 @@ export default StyleSheet.create({
   },
   boxsaldo: {
     flexDirection: 'row',
-    justifyContent: 'center',
     borderBottomWidth: 2,
-    // paddingLeft: 5,
+    padding: 5,
   },
   boxFitur: {
     width: 60,
     height: 60,
     backgroundColor: 'white',
     margin: 10,
+  },
+  headers: {
+    flexDirection: 'row',
+    width: '100%',
+    backgroundColor: '#087f23',
+    height: 50,
+    alignItems: 'center',
+  },
+  IconHead: {
+    width: 40,
+    height: 40,
+    margin: 5,
+    backgroundColor: 'red',
   },
 });

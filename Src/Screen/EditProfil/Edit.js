@@ -86,6 +86,7 @@ export class EditProfile extends Component {
       body: this.createFormData(avatar, data),
       headers: {
         Accept: 'application/json',
+        // 'Content-Type': 'application/json',
         Authorization: `Bearer ${this.state.token}`,
       },
     })

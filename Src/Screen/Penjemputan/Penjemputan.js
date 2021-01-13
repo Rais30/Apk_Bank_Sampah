@@ -8,6 +8,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Linking,
+  ToastAndroid,
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import styles from '../../Components/BoxSetor/boxSetor';
@@ -29,7 +30,7 @@ export class Penjemputan extends Component {
     };
   }
 
-  EditProfil = () => {
+  setorSampah = () => {
     // console.log(this.state.token);
 
     const {name, phone_number, image} = this.state;
@@ -121,6 +122,7 @@ export class Penjemputan extends Component {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
+        this.alamat();
       },
       (error) => {
         // See error code charts below.
@@ -128,6 +130,28 @@ export class Penjemputan extends Component {
       },
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
     );
+  }
+  alamat() {
+    const {latitude, longitude} = this.state;
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+    // this.setState({loading: true});
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        Accept: 'aplication/json',
+        'Content-Type': 'aplication/json',
+        // Authorization: `Bearer ${this.state.token}`,
+      },
+    })
+      .then((respon) => respon.json())
+      .then((resJson) => {
+        console.log(' ini alamt', resJson.display_name);
+        this.setState({address: resJson.display_name});
+      })
+      .catch((error) => {
+        console.log('error is' + error);
+        this.setState({loading: false});
+      });
   }
 
   render() {
@@ -138,20 +162,31 @@ export class Penjemputan extends Component {
         </View>
         <ScrollView>
           <View style={styles.boxInput}>
-            <TouchableOpacity style={styles.image}>
-              <Image />
+            <TouchableOpacity
+              style={styles.image}
+              onPress={() => this.handleChoosePhoto()}>
+              {this.state.image !== '' ? (
+                <Image
+                  style={styles.gambar}
+                  source={{uri: this.state.image.uri}}
+                />
+              ) : (
+                <Text style={{fontSize: 33}}>foto sampah Kamu</Text>
+              )}
             </TouchableOpacity>
             <View style={styles.Input}>
               <TextInput
-                placeholder="Nama"
-                onChangeText={(text) => this.setState({address: text})}
+                placeholder=" Nomer Telepon "
+                keyboardType="number-pad"
+                onChangeText={(text) => this.setState({phone_number: text})}
               />
             </View>
+
             <View style={styles.Input}>
-              <TextInput />
-            </View>
-            <View style={styles.Input}>
-              <TextInput />
+              <TextInput
+                placeholder=" Description "
+                onChangeText={(text) => this.setState({description: text})}
+              />
             </View>
             <View>
               {this.state.longitude == '' ? (
@@ -170,12 +205,18 @@ export class Penjemputan extends Component {
                   style={{height: 350, width: 350}}></MapView>
               )}
             </View>
-            <View style={{...styles.Input, height: 75}}>
-              <Text> </Text>
+            <View style={{...styles.Input, height: 75, padding: 10}}>
+              <Text>{this.state.address}</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.klik}>
-            <Text style={{fontSize: 40, color: 'white'}}> Setor </Text>
+          <TouchableOpacity
+            style={styles.klik}
+            onPress={() => this.setorSampah()}>
+            {this.state.loading ? (
+              <ActivityIndicator color="red" size="small" />
+            ) : (
+              <Text style={{fontSize: 40, color: 'white'}}> Setor </Text>
+            )}
           </TouchableOpacity>
         </ScrollView>
       </View>

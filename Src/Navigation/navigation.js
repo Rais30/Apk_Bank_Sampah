@@ -20,6 +20,7 @@ import Tabungan from '../Screen/BukuTabungan/Tabungan';
 import TarikSaldo from '../Screen/PenarikanSaldo/TarikSaldo';
 import Setok from '../Screen/SampahGudang/Setok';
 import HistorySaldo from '../Screen/HistoryPenarikan/HistorySaldo';
+import Chat from '../Screen/Chattting/Chat';
 
 // const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -60,6 +61,7 @@ class Navigation extends React.Component {
           <Stack.Screen name="HistorySaldo" component={HistorySaldo} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Profil" component={Profil} />
+          <Stack.Screen name="Chat" component={Chat} />
         </Stack.Navigator>
       </NavigationContainer>
     );

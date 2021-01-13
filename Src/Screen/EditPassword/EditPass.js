@@ -40,7 +40,7 @@ export class EditPass extends Component {
       body: JSON.stringify(data),
       headers: {
         Accept: 'application/json',
-        'Content Type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${this.state.token}`,
       },
     })

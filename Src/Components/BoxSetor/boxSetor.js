@@ -41,4 +41,8 @@ export default StyleSheet.create({
     backgroundColor: '#C0C0C0',
     margin: 10,
   },
+  gambar: {
+    height: 300,
+    width: 300,
+  },
 });
