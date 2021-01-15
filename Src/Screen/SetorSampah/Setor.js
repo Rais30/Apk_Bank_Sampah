@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {Text, View, ScrollView, I} from 'react-native';
 import styles from '../../Components/BoxSetor/boxSetor';
 
-class Setor extends Component {
+class SetorP1 extends Component {
   constructor() {
     super();
     this.state = {
@@ -32,4 +32,4 @@ class Setor extends Component {
   }
 }
 
-export default Setor;
+export default SetorP1;

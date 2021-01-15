@@ -104,11 +104,6 @@ export class Home extends Component {
             <View style={{alignItems: 'center'}}>
               <ScrollView horizontal={true}>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('Setor')}
-                  style={styles.boxFitur}>
-                  <Text>setor sampah</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
                   onPress={() => this.props.navigation.navigate('Penjemputan')}
                   style={styles.boxFitur}>
                   <Text>penjemputan sampah</Text>
@@ -122,11 +117,6 @@ export class Home extends Component {
                   onPress={() => this.props.navigation.navigate('TarikSaldo')}
                   style={styles.boxFitur}>
                   <Text>penaria saldo</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('SetokSampah')}
-                  style={styles.boxFitur}>
-                  <Text>Sampah</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.props.navigation.navigate('HistorySaldo')}

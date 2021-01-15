@@ -33,7 +33,7 @@ export class Profil extends Component {
       .then((respon) => respon.json())
       .then((resJson) => {
         this.setState({dataKu: resJson.data, loading: false});
-        console.log(resJson.data);
+        console.log(resJson);
       })
       .catch((error) => {
         console.log('error is' + error);

@@ -9,7 +9,7 @@ export class Tabungan extends Component {
     this.state = {
       token: '',
       loading: false,
-      data: '',
+      data: [],
     };
   }
   componentDidMount() {
@@ -63,7 +63,24 @@ export class Tabungan extends Component {
                 </View>
               ) : (
                 <View>
-                  <Text>ada tabungan</Text>
+                  {this.state.data.map((val, key) => {
+                    return (
+                      <View key={key} style={{}}>
+                        <View>
+                          <Text>{val.created_at}</Text>
+                        </View>
+                        <View>
+                          <Text>{val.debit}</Text>
+                        </View>
+                        <View>
+                          <Text>{val.keterangan}</Text>
+                        </View>
+                        <View>
+                          <Text>{val.saldo}</Text>
+                        </View>
+                      </View>
+                    );
+                  })}
                 </View>
               )}
             </ScrollView>
