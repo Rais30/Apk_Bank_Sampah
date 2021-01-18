@@ -48,4 +48,25 @@ export default StyleSheet.create({
     height: 250,
     backgroundColor: 'white',
   },
+  dataMap: {
+    height: 300,
+    width: 370,
+    backgroundColor: 'white',
+    alignSelf: 'center',
+    margin: 5,
+  },
+  tomKonfrim: {
+    margin: 10,
+    width: 100,
+    height: 50,
+    backgroundColor: 'red',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  imageSampah: {
+    width: 100,
+    height: 100,
+  },
 });

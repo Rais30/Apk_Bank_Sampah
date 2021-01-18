@@ -4,27 +4,28 @@ import {Text, View, ActivityIndicator, Image} from 'react-native';
 import styles from '../../Components/Splass/boxSplass';
 
 export class Splass extends Component {
-  constructor() {
-    super();
-    this.state = {
-      token: '',
-    };
-    AsyncStorage.getItem('token').then((token) => {
-      if (token != null) {
-        this.setState({token: token});
-      } else {
-        console.log('no token');
-      }
-    });
-  }
   componentDidMount() {
     setTimeout(() => {
-      if (this.state.token != '') {
-        this.props.navigation.replace('Rumah', {screen: 'HomeOne'});
-      } else {
-        this.props.navigation.replace('Splash');
-      }
-    }, 3000);
+      AsyncStorage.getItem('token').then((token) => {
+        if (token != null) {
+          AsyncStorage.getItem('role').then((role) => {
+            if (role == '1') {
+              console.log(' nasamah ');
+              this.props.navigation.replace('Rumah', {screen: 'HomeOne'});
+            } else if (role == '2') {
+              console.log(' pengurus 1 ');
+              this.props.navigation.replace('Rumah', {screen: 'Home1'});
+            } else {
+              console.log(' pengurus 2 ');
+              this.props.navigation.replace('Rumah', {screen: 'Home2'});
+            }
+          });
+        } else {
+          console.log('no token');
+          this.props.navigation.replace('Splash');
+        }
+      });
+    }, 5000);
   }
 
   render() {

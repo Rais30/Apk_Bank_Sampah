@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {Component} from 'react';
-import {Text, View, ScrollView, I} from 'react-native';
+import {Text, View, ScrollView} from 'react-native';
 import styles from '../../Components/BoxSetor/boxSetor';
 
 class SetorP1 extends Component {

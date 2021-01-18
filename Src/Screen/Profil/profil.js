@@ -105,11 +105,7 @@ export class Profil extends Component {
                   Ubah Sandi
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.styleProfil}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                  History Penjemputan
-                </Text>
-              </TouchableOpacity>
+
               <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('Edit')}
                 style={styles.styleProfil}>
@@ -119,7 +115,7 @@ export class Profil extends Component {
               </TouchableOpacity>
               <TouchableOpacity style={styles.styleProfil}>
                 <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                  Ubah Sandi
+                  Lupa Password
                 </Text>
               </TouchableOpacity>
             </View>

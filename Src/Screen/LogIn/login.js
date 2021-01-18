@@ -41,7 +41,7 @@ export class Login extends Component {
       .then((res) => res.json())
       .then((resjson) => {
         console.log(resjson);
-        const {token} = resjson;
+        const {token, user} = resjson;
         if (token) {
           ToastAndroid.show(
             ' Anda Berasil Masuk',
@@ -50,9 +50,10 @@ export class Login extends Component {
             // console.log(resJson),
           );
           AsyncStorage.setItem('token', token);
-          console.log(token);
+          AsyncStorage.setItem('role', user.role_id.toString());
+          console.log(' ini role_id ', resjson.user.role_id);
           this.setState({loading: false});
-          this.props.navigation.replace('Rumah', {screen: 'HomeOne'});
+          this.role_id(resjson.user.role_id);
         } else if (resjson.error) {
           alert(resjson.error);
           this.setState({loading: false});
@@ -60,11 +61,21 @@ export class Login extends Component {
           console.log(error);
           this.setState({loading: false});
         }
-      });
+      })
+      .catch((err) => console.log(err), this.setState({loading: false}));
   };
   Lihat = () => {
     this.setState({lihat: !this.state.lihat});
   };
+  role_id(role) {
+    if (role == 1) {
+      this.props.navigation.replace('Rumah', {screen: 'HomeOne'});
+    } else if (role == 2) {
+      this.props.navigation.replace('Rumah', {screen: 'Home1'});
+    } else {
+      this.props.navigation.replace('Rumah', {screen: 'Home2'});
+    }
+  }
   render() {
     return (
       <ScrollView style={styles.utama}>

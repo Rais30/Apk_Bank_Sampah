@@ -20,6 +20,9 @@ import TarikSaldo from '../Screen/PenarikanSaldo/TarikSaldo';
 import StokP2 from '../Screen/SampahGudang/Setok';
 import HistorySaldo from '../Screen/HistoryPenarikan/HistorySaldo';
 import Chat from '../Screen/Chattting/Chat';
+import Home1 from '../Screen/Home/home1';
+import Home2 from '../Screen/Home/home2';
+import Jemput from '../Screen/Menjemputan/Jemput';
 
 // const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -31,6 +34,8 @@ function Rumah() {
       initialRouteName="HomeOne"
       drawerContent={(props) => <Profil {...props} />}>
       <Drawer.Screen name="HomeOne" component={Home} />
+      <Drawer.Screen name="Home1" component={Home1} />
+      <Drawer.Screen name="Home2" component={Home2} />
     </Drawer.Navigator>
   );
 }
@@ -61,6 +66,9 @@ class Navigation extends React.Component {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Profil" component={Profil} />
           <Stack.Screen name="Chat" component={Chat} />
+          <Stack.Screen name="Home1" component={Home1} />
+          <Stack.Screen name="Home2" component={Home2} />
+          <Stack.Screen name="Jemput" component={Jemput} />
         </Stack.Navigator>
       </NavigationContainer>
     );
