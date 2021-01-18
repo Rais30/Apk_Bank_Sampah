@@ -5,7 +5,6 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
-  Button,
   TouchableNativeFeedback,
   Image,
 } from 'react-native';
@@ -52,13 +51,13 @@ export class Jemput extends Component {
         this.setState({loading: false});
       });
   }
-  statusBarang(status, id) {
+  statusBarang(status, id, user_id) {
     if (status == 0) {
       return (
         <View>
           <Text>Menunggu Penjemputan</Text>
           <View style={{flexDirection: 'row'}}>
-            <View style={styles.tomKonfrim}>
+            <View style={{...styles.tomKonfrim, backgroundColor: 'red'}}>
               <TouchableNativeFeedback onPress={() => this.Penolakan(id)}>
                 <Text style={{fontSize: 30, color: 'white'}}> Tolak</Text>
               </TouchableNativeFeedback>
@@ -75,18 +74,30 @@ export class Jemput extends Component {
       return (
         <View>
           <Text> Menunggu Penjemputan Anda </Text>
-          <View>
-            <TouchableNativeFeedback
-              onPress={() => this.props.navigation.navigate('Chat')}>
-              <Icon name="message" size={30} />
-            </TouchableNativeFeedback>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{...styles.tomKonfrim, backgroundColor: 'blue'}}>
+              <TouchableNativeFeedback
+                onPress={() =>
+                  this.props.navigation.navigate('Chat', {user_id: user_id})
+                }>
+                <Icon name="message" size={30} />
+              </TouchableNativeFeedback>
+            </View>
+            <View style={{...styles.tomKonfrim, backgroundColor: 'blue'}}>
+              <TouchableNativeFeedback
+                onPress={() =>
+                  this.props.navigation.navigate('SetorP1', {user_id: user_id})
+                }>
+                <Text> Setor </Text>
+              </TouchableNativeFeedback>
+            </View>
           </View>
         </View>
       );
     } else if (status == 3) {
       return (
         <View>
-          <Text> Dibatalkan </Text>
+          <Text style={{fontSize: 30, color: 'red'}}> Dibatalkan </Text>
         </View>
       );
     }
@@ -142,14 +153,14 @@ export class Jemput extends Component {
     return (
       <View style={styles.Utama}>
         <View style={styles.headers}>
-          <Text style={{fontSize: 40, color: 'white'}}>
+          <Text style={{fontSize: 30, color: 'white'}}>
             Permintaan Penjemputan
           </Text>
         </View>
         <ScrollView>
           {this.state.data == '' ? (
             <View>
-              <ActivityIndicator size={50} color="red" />
+              <ActivityIndicator size={30} color="red" />
               <View style={{alignSelf: 'center'}}>
                 <Text> Periksa Jaringan Anda </Text>
               </View>
@@ -177,8 +188,8 @@ export class Jemput extends Component {
                         style={styles.imageSampah}
                       />
                     </View>
-                    <View>
-                      <Text>{this.statusBarang(val.status, val.id)}</Text>
+                    <View style={{margin: 10}}>
+                      {this.statusBarang(val.status, val.id, val.user_id)}
                     </View>
                   </View>
                 );

@@ -62,7 +62,7 @@ export class Home1 extends Component {
             <Icon name="reorder" size={40} />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Chat')}
+            onPress={() => this.props.navigation.navigate('Kontak')}
             style={styles.IconHead}>
             <Icon name="question-answer" size={40} />
           </TouchableOpacity>

@@ -23,6 +23,7 @@ import Chat from '../Screen/Chattting/Chat';
 import Home1 from '../Screen/Home/home1';
 import Home2 from '../Screen/Home/home2';
 import Jemput from '../Screen/Menjemputan/Jemput';
+import Kontak from '../Screen/Kontak/Kontak';
 
 // const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -69,6 +70,7 @@ class Navigation extends React.Component {
           <Stack.Screen name="Home1" component={Home1} />
           <Stack.Screen name="Home2" component={Home2} />
           <Stack.Screen name="Jemput" component={Jemput} />
+          <Stack.Screen name="Kontak" component={Kontak} />
         </Stack.Navigator>
       </NavigationContainer>
     );

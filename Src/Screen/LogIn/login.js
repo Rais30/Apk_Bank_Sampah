@@ -49,8 +49,10 @@ export class Login extends Component {
             ToastAndroid.CENTER,
             // console.log(resJson),
           );
-          AsyncStorage.setItem('token', token);
+          AsyncStorage.setItem('user', user.id.toString());
           AsyncStorage.setItem('role', user.role_id.toString());
+          AsyncStorage.setItem('token', token);
+
           console.log(' ini role_id ', resjson.user.role_id);
           this.setState({loading: false});
           this.role_id(resjson.user.role_id);
