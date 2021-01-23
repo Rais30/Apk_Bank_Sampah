@@ -24,6 +24,7 @@ export class Login extends Component {
     };
   }
   Masuk = () => {
+    console.log('logIn');
     const {email, password} = this.state;
     const url = 'https://sammpah.herokuapp.com/api/login';
     this.setState({loading: true});
@@ -52,10 +53,10 @@ export class Login extends Component {
           AsyncStorage.setItem('user', user.id.toString());
           AsyncStorage.setItem('role', user.role_id.toString());
           AsyncStorage.setItem('token', token);
-
           console.log(' ini role_id ', resjson.user.role_id);
+          this.role_id(user.role_id);
           this.setState({loading: false});
-          this.role_id(resjson.user.role_id);
+          // this.role_id(resjson.user.role_id);
         } else if (resjson.error) {
           alert(resjson.error);
           this.setState({loading: false});
@@ -133,7 +134,7 @@ export class Login extends Component {
             </Text>
           </View>
           <View>
-            <Text style={{...styles.textSaya, marginLeft: 140}}>
+            <Text style={{...styles.textSaya, marginLeft: 90}}>
               Lupa Password
             </Text>
           </View>

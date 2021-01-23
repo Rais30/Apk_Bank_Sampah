@@ -18,16 +18,17 @@ export class Home2 extends Component {
     this.state = {
       saldo: '',
       token: '',
+      name: '',
+      email: '',
     };
   }
   componentDidMount() {
-    AsyncStorage.getItem('token').then((token) => {
+    AsyncStorage.getItem('name');
+    AsyncStorage.getItem('token').then((token, name, email) => {
       if (token != null) {
-        this.setState({token: token});
-        console.log(this.state.token);
-        this.saldoKu();
+        this.setState({token: token, name: name, email: email});
       } else {
-        console.log('token tidak ada');
+        console.log('token, name, eamil tidak ada');
       }
     });
   }
@@ -58,8 +59,11 @@ export class Home2 extends Component {
         <View style={styles.headers}>
           <TouchableOpacity
             onPress={() => this.props.navigation.openDrawer()}
-            style={{...styles.IconHead, marginRight: '74%'}}>
-            <Icon name="reorder" size={40} />
+            style={{...styles.boxgambar, marginRight: '68%'}}>
+            <Image
+              source={require('../../Assets/fotoLogo/recycle-icon-5.jpg')}
+              style={styles.gambar}
+            />
           </TouchableOpacity>
         </View>
         <ScrollView style={{backgroundColor: '#00c853'}}>

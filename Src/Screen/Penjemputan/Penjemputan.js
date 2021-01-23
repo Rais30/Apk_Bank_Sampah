@@ -31,13 +31,14 @@ export class Penjemputan extends Component {
   }
 
   setorSampah = () => {
-    // console.log(this.state.token);
+    console.log('setor sampah');
 
-    const {name, phone_number, image} = this.state;
+    const {name, phone_number, image, address} = this.state;
     const url = 'https://sammpah.herokuapp.com/api/profile';
     const data = {
       name: name,
       phone_number: phone_number,
+      address: address,
     };
     this.setState({loading: true});
     // console.log(this.state.token);
@@ -52,7 +53,7 @@ export class Penjemputan extends Component {
     })
       .then((respon) => respon.json())
       .then((resJson) => {
-        console.log(resJson);
+        console.log('ini respon pennyetoransampah', resJson);
         const {status} = resJson;
         if (status == 'Success') {
           ToastAndroid.show(
@@ -60,19 +61,19 @@ export class Penjemputan extends Component {
             ToastAndroid.SHORT,
             ToastAndroid.CENTER,
             console.log(resJson),
-            this.props.navigation.replace('Rumah', {screen: 'Profil'}),
+            this.props.navigation.replace('Rumah', {screen: 'HomeOne'}),
           );
           this.setState({loading: false});
           // this.props.navigation.navigate('Home');
         } else {
+          console.log('ada error bang');
+          alert('periksa kemabli data anda ');
           this.setState({loading: false});
-          console.log('error');
-          alert('error');
         }
       })
       .catch((error) => {
         this.setState({loading: false});
-        console.log('error is' + error);
+        console.log('error dari penyetoran sampah' + error);
       });
   };
   createFormData = (photo, body) => {

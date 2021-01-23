@@ -24,13 +24,14 @@ export class Jemput extends Component {
     AsyncStorage.getItem('token').then((token) => {
       if (token != null) {
         this.setState({token: token});
-        this.Sampah();
+        this.Sampah(token);
       } else {
         console.log('tidak ada token');
       }
     });
   }
-  Sampah() {
+  Sampah(token) {
+    console.log('ini sampah');
     const url = 'https://sammpah.herokuapp.com/api/penjemputan/daftar';
     this.setState({loading: true});
     fetch(url, {
@@ -52,6 +53,7 @@ export class Jemput extends Component {
       });
   }
   statusBarang(status, id, user_id) {
+    console.log(user_id);
     if (status == 0) {
       return (
         <View>
@@ -64,7 +66,7 @@ export class Jemput extends Component {
             </View>
             <View style={{...styles.tomKonfrim, backgroundColor: 'blue'}}>
               <TouchableNativeFeedback onPress={() => this.Konfir(id)}>
-                <Text style={{fontSize: 30, color: 'white'}}> Terima </Text>
+                <Text style={{fontSize: 27, color: 'white'}}> Terima </Text>
               </TouchableNativeFeedback>
             </View>
           </View>
@@ -78,7 +80,10 @@ export class Jemput extends Component {
             <View style={{...styles.tomKonfrim, backgroundColor: 'blue'}}>
               <TouchableNativeFeedback
                 onPress={() =>
-                  this.props.navigation.navigate('Chat', {user_id: user_id})
+                  this.props.navigation.navigate('Chat', {
+                    user_id: user_id,
+                    id: id,
+                  })
                 }>
                 <Icon name="message" size={30} />
               </TouchableNativeFeedback>
@@ -86,9 +91,12 @@ export class Jemput extends Component {
             <View style={{...styles.tomKonfrim, backgroundColor: 'blue'}}>
               <TouchableNativeFeedback
                 onPress={() =>
-                  this.props.navigation.navigate('SetorP1', {user_id: user_id})
+                  this.props.navigation.navigate('SetorP1', {
+                    user_id: user_id,
+                    id: id,
+                  })
                 }>
-                <Text> Setor </Text>
+                <Text style={{fontSize: 30, color: 'white'}}> Setor </Text>
               </TouchableNativeFeedback>
             </View>
           </View>
@@ -98,6 +106,12 @@ export class Jemput extends Component {
       return (
         <View>
           <Text style={{fontSize: 30, color: 'red'}}> Dibatalkan </Text>
+        </View>
+      );
+    } else if (status == 2) {
+      return (
+        <View>
+          <Text style={{fontSize: 30, color: 'blue'}}> Selesai </Text>
         </View>
       );
     }
@@ -158,7 +172,7 @@ export class Jemput extends Component {
           </Text>
         </View>
         <ScrollView>
-          {this.state.data == '' ? (
+          {this.state.data == null ? (
             <View>
               <ActivityIndicator size={30} color="red" />
               <View style={{alignSelf: 'center'}}>

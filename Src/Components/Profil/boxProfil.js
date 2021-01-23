@@ -16,12 +16,14 @@ export default StyleSheet.create({
   },
   dataDiri: {
     // flexDirection: 'row',
-    backgroundColor: '#80e27e',
+    backgroundColor: 'white',
     // height: 160,
-    width: '95%',
-    marginTop: 30,
+    width: '100%',
+    // marginTop: 30,
     padding: 17,
-    borderRadius: 15,
+    // borderRadius: 15,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
   },
   bioKu: {
     padding: 10,
@@ -30,7 +32,7 @@ export default StyleSheet.create({
     fontSize: 17,
   },
   keluar: {
-    backgroundColor: '#76d275',
+    backgroundColor: 'red',
     alignItems: 'center',
     width: 150,
     height: 40,

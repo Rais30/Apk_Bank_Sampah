@@ -20,6 +20,8 @@ class Kontak extends Component {
       loading: false,
       user: '',
     };
+  }
+  componentDidMount() {
     AsyncStorage.getItem('user').then((user) => {
       if (user != null) {
         this.setState({user: user});
@@ -39,6 +41,7 @@ class Kontak extends Component {
     });
   }
   AddKontak = () => {
+    console.log('get kontak');
     const url = 'https://sammpah.herokuapp.com/api/allmessage';
     this.setState({loading: true});
     fetch(url, {
@@ -52,10 +55,11 @@ class Kontak extends Component {
       .then((respon) => respon.json())
       .then((resJson) => {
         console.log(resJson);
-        this.setState({data: resJson.kontak, loading: false});
+        this.setState({data: resJson.data, loading: false});
+        console.log('ini kontak', this.state.data);
       })
       .catch((error) => {
-        console.log('error is' + error);
+        console.log('error adalahw' + error);
         this.setState({loading: false});
       });
   };
@@ -67,8 +71,11 @@ class Kontak extends Component {
         </View>
         <ScrollView style={styles.viewUtama}>
           {this.state.data == null ? (
-            <View>
-              <ActivityIndicator color="red" size={30} />
+            <View style={{alignItems: 'center'}}>
+              <ActivityIndicator size={40} color="red" />
+              <Text style={{fontSize: 15}}>
+                anda tidak meiliki kontak yang di dapat di hubungi
+              </Text>
             </View>
           ) : (
             <>
@@ -78,14 +85,14 @@ class Kontak extends Component {
                     <TouchableOpacity
                       style={styles.boxPesan}
                       onPress={() =>
-                        this.props.navigation.navigate('Message', {
-                          item: val.id,
+                        this.props.navigation.navigate('Chat', {
+                          user_id: val.id,
                         })
                       }>
                       <>
-                        {val.foto !== '' ? (
+                        {val.foto !== null ? (
                           <Image
-                            source={{uri: val.foto}}
+                            source={{uri: val.avatar}}
                             style={styles.viewImage}
                           />
                         ) : (

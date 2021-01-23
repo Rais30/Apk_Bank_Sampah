@@ -11,17 +11,16 @@ export default StyleSheet.create({
     backgroundColor: '#00c853',
   },
   gambar: {
-    width: 60,
-    height: 60,
+    width: 40,
+    height: 40,
     borderRadius: 30,
   },
   boxgambar: {
-    width: 60,
-    height: 60,
     backgroundColor: '#4c8c4a',
     borderRadius: 30,
     marginVertical: 10,
     marginLeft: 10,
+    padding: 2,
   },
   dataKu: {
     marginVertical: 15,
@@ -33,7 +32,10 @@ export default StyleSheet.create({
     backgroundColor: '#76d275',
     // justifyContent: 'center',
     alignSelf: 'center',
-    borderRadius: 15,
+    // borderRadius: 15,
+    elevation: 5,
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
   },
   saldo: {
     width: '50%',
@@ -49,7 +51,7 @@ export default StyleSheet.create({
   boxFitur: {
     width: 60,
     height: 60,
-    backgroundColor: 'white',
+    // backgroundColor: '',
     margin: 10,
   },
   headers: {
@@ -63,6 +65,16 @@ export default StyleSheet.create({
     width: 40,
     height: 40,
     margin: 5,
-    backgroundColor: 'red',
+  },
+  dataMap: {
+    backgroundColor: 'white',
+    alignSelf: 'center',
+    margin: 5,
+    padding: 5,
+    borderRadius: 10,
+  },
+  imageSampah: {
+    width: 100,
+    height: 100,
   },
 });

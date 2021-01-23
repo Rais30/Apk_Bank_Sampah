@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import styles from '../../Components/BoxSetor/boxSetor';
 
-class SetorP1 extends Component {
+export default class SetorSampah extends Component {
   constructor() {
     super();
     this.state = {
@@ -24,7 +24,6 @@ class SetorP1 extends Component {
       jenis_sampah: '',
       idSampah: '',
       hargaSampah: '',
-      email: '',
     };
   }
   componentDidMount() {
@@ -61,44 +60,6 @@ class SetorP1 extends Component {
         this.setState({loading: false});
       });
   }
-  SetorPenjemputan() {
-    const {idSampah, berat, email} = this.state;
-    const data = {
-      jenis_sampah: idSampah,
-      berat: berat,
-      email: email,
-    };
-    const url = `https://sammpah.herokuapp.com/api/setor`;
-    this.setState({loading: true});
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer${this.state.token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((resjson) => {
-        console.log('ini penyetoran sampah ', resjson);
-        const {message} = resjson;
-        if (message == 'Sampah berhasil disetor') {
-          ToastAndroid.show(
-            ' Berhasil DiSetor',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
-            // console.log(resJson),
-            this.props.navigation.navigate('Home1'),
-          );
-          this.setState({loading: false});
-        } else {
-          console.log(error);
-          this.setState({loading: false});
-        }
-      })
-      .catch((err) => console.log(err), this.setState({loading: false}));
-  }
   DataSampah() {
     return (
       <View>
@@ -132,29 +93,53 @@ class SetorP1 extends Component {
                 Harga Sampah /kg : {this.state.hargaSampah}
               </Text>
             </View>
-            <View
-              style={{
-                backgroundColor: 'white',
-                width: '90%',
-                padding: 10,
-                elevation: 5,
-                borderRadius: 5,
-                marginBottom: 5,
-              }}>
-              <Text style={{fontSize: 15}}>Biaya Ongkir : 20%</Text>
-            </View>
           </View>
         )}
       </View>
     );
   }
+  SetorPenjemputan() {
+    const {idSampah, berat} = this.state;
+    const data = {
+      jenis_sampah: idSampah,
+      berat: berat,
+    };
+    const url = `https://sammpah.herokuapp.com/api/setor`;
+    this.setState({loading: true});
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer${this.state.token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((resjson) => {
+        console.log('ini penyetoran sampah ', resjson);
+        const {message} = resjson;
+        if (message == 'Sampah berhasil disetor') {
+          ToastAndroid.show(
+            ' Berhasil DiSetor',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+            // console.log(resJson),
+            this.props.navigation.navigate('Home1'),
+          );
+          this.setState({loading: false});
+        } else {
+          console.log(error);
+          this.setState({loading: false});
+        }
+      })
+      .catch((err) => console.log(err), this.setState({loading: false}));
+  }
   render() {
     return (
       <View style={styles.utama}>
         <View style={styles.headers}>
-          <Text style={{fontSize: 30, color: 'white'}}>
-            Setor Sampah Driver
-          </Text>
+          <Text style={{fontSize: 30, color: 'white'}}> Setor Sampah </Text>
         </View>
         <View>
           <ScrollView>
@@ -249,5 +234,3 @@ class SetorP1 extends Component {
     );
   }
 }
-
-export default SetorP1;

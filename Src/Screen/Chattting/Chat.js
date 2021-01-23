@@ -22,12 +22,14 @@ export class Chat extends Component {
       id: '',
       token: '',
       loading: false,
+      user: '',
     };
   }
 
   message = () => {
+    console.log('kirim pesan');
     const {input} = this.state;
-    const url = `https://sammpah.herokuapp.com/api/chat/${this.props.route.params.id_user}`;
+    const url = `https://sammpah.herokuapp.com/api/chat/${this.props.route.params.user_id}`;
     this.setState({loading: true});
     fetch(url, {
       method: 'POST',
@@ -40,20 +42,24 @@ export class Chat extends Component {
     })
       .then((res) => res.json())
       .then((resjson) => {
-        console.log(resjson);
+        console.log('ini respon', resjson);
         const {status} = resjson;
-        if (status == 'success') {
+        if (status == 'Success') {
           this.setState({loading: false});
+          console.log('pesan berasil di kirim');
+          this.add();
         } else {
-          console.log('error');
+          console.log('ada errpr di sini');
           this.setState({loading: false});
+          console.log('pesan gagal dikirm');
         }
       })
       .catch((err) => console.log('Terjadi kesalahan. ' + err));
   };
 
-  add = () => {
-    const url = `https://sammpah.herokuapp.com/api/chat/${this.props.route.params.id_user}`;
+  add = (token) => {
+    console.log('add pesan');
+    const url = `https://sammpah.herokuapp.com/api/chat/${this.props.route.params.user_id}`;
     this.setState({loading: true});
     fetch(url, {
       method: 'GET',
@@ -66,11 +72,11 @@ export class Chat extends Component {
       .then((respon) => respon.json())
       .then((resJson) => {
         this.setState({
-          data: resJson.message,
-          id: resJson.user.id,
+          data: resJson.data,
+
           loading: false,
         });
-        console.log(this.state.data[0].from);
+        console.log('ini pesan ', resJson);
       })
       .catch((error) => {
         console.log('error is ' + error);
@@ -78,13 +84,21 @@ export class Chat extends Component {
       });
   };
   componentDidMount() {
-    AsyncStorage.getItem('token').then((token) => {
-      if (token != null) {
-        this.setState({token: token});
-        console.log('token ada');
-        this.add();
+    AsyncStorage.getItem('user').then((user) => {
+      if (user != null) {
+        this.setState({user: user});
+        console.log('ini id user member', this.state.user);
+        AsyncStorage.getItem('token').then((token) => {
+          if (token != null) {
+            this.setState({token: token});
+            console.log('token ada');
+            this.add(token);
+          } else {
+            console.log('token tidak ada');
+          }
+        });
       } else {
-        console.log('token tidak ada');
+        console.log('user ID tidak ada');
       }
     });
     Pusher.logToConsole = true;
@@ -95,11 +109,13 @@ export class Chat extends Component {
 
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function (data) {
-      alert(JSON.stringify(data));
+      console.log(JSON.stringify(data));
     });
   }
 
   render() {
+    // console.log('ini id user', this.props.route.params.user_id);
+
     return (
       <View style={{flex: 1}}>
         <View style={styles.header}>
@@ -109,7 +125,7 @@ export class Chat extends Component {
         <View style={{flex: 1}}>
           <ScrollView>
             <View>
-              {this.state.data.length == 0 ? (
+              {this.state.data == null ? (
                 <View>
                   <ActivityIndicator color="red" size={30} />
                 </View>
@@ -118,7 +134,7 @@ export class Chat extends Component {
                   {this.state.data.map((value, key) => {
                     return (
                       <View key={key}>
-                        {value.from == this.props.route.params.id_user ? (
+                        {value.from == this.props.route.params.user_id ? (
                           <View style={styles.getText}>
                             <Text>{value.message}</Text>
                           </View>

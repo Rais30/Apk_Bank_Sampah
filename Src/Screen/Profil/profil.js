@@ -101,7 +101,8 @@ export class Profil extends Component {
               <TouchableOpacity
                 style={styles.styleProfil}
                 onPress={() => this.props.navigation.navigate('EditPass')}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                <Text
+                  style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
                   Ubah Sandi
                 </Text>
               </TouchableOpacity>
@@ -109,12 +110,14 @@ export class Profil extends Component {
               <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('Edit')}
                 style={styles.styleProfil}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                <Text
+                  style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
                   Edit Profil
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.styleProfil}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                <Text
+                  style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
                   Lupa Password
                 </Text>
               </TouchableOpacity>
@@ -123,7 +126,11 @@ export class Profil extends Component {
               <TouchableOpacity
                 onPress={() => this.LogOut()}
                 style={styles.keluar}>
-                <Text style={{fontSize: 30}}> Log Out </Text>
+                <Text
+                  style={{fontSize: 30, fontWeight: 'bold', color: 'white'}}>
+                  {' '}
+                  Log Out{' '}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

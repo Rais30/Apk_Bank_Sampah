@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+// import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../../Components/Home/BoxHome';
 AsyncStorage;
 
@@ -18,16 +18,16 @@ export class Home1 extends Component {
     this.state = {
       saldo: '',
       token: '',
+      name: '',
+      emasil: '',
     };
   }
   componentDidMount() {
     AsyncStorage.getItem('token').then((token) => {
       if (token != null) {
         this.setState({token: token});
-        console.log(this.state.token);
-        this.saldoKu();
       } else {
-        console.log('token tidak ada');
+        console.log('token, name, eamil tidak ada');
       }
     });
   }
@@ -58,29 +58,34 @@ export class Home1 extends Component {
         <View style={styles.headers}>
           <TouchableOpacity
             onPress={() => this.props.navigation.openDrawer()}
-            style={{...styles.IconHead, marginRight: '74%'}}>
-            <Icon name="reorder" size={40} />
+            style={{...styles.boxgambar, marginRight: '68%'}}>
+            <Image
+              source={require('../../Assets/fotoLogo/recycle-icon-5.jpg')}
+              style={styles.gambar}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Kontak')}
             style={styles.IconHead}>
-            <Icon name="question-answer" size={40} />
+            <Image
+              source={require('../../Assets/fotoLogo/icons8-new-contact-100.png')}
+              style={{width: 40, height: 40}}
+            />
           </TouchableOpacity>
         </View>
-        <ScrollView style={{backgroundColor: '#00c853'}}>
-          <View style={styles.head}>
-            <View style={styles.boxgambar}>
-              <Image
-                source={require('../../Assets/fotoLogo/recycle-icon-5.jpg')}
-                style={styles.gambar}
-              />
-            </View>
+        <ScrollView>
+          <View style={{...styles.head, backgroundColor: '#087f23'}}>
             <View style={styles.dataKu}>
               <View>
-                <Text style={{fontSize: 25}}> Pengurus 1 </Text>
+                <Text
+                  style={{fontSize: 25, fontWeight: 'bold', color: 'white'}}>
+                  Pengurus 1
+                </Text>
               </View>
               <View>
-                <Text style={{fontSize: 18}}>raisazaria30@gmail.com</Text>
+                <Text style={{fontSize: 18, color: 'white'}}>
+                  raisazaria30@gmail.com
+                </Text>
               </View>
             </View>
           </View>
@@ -88,14 +93,20 @@ export class Home1 extends Component {
             <View style={{alignItems: 'center'}}>
               <ScrollView horizontal={true}>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('SetorP1')}
+                  onPress={() => this.props.navigation.navigate('SetorSampah')}
                   style={styles.boxFitur}>
-                  <Text> Penyetoran Sampah Nasabah</Text>
+                  <Image
+                    source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                    style={{height: 65, width: 65}}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.props.navigation.navigate('Jemput')}
                   style={styles.boxFitur}>
-                  <Text>permintaan penjemputan</Text>
+                  <Image
+                    source={require('../../Assets/fotoLogo/icons8-new-message-100.png')}
+                    style={{width: 60, height: 60}}
+                  />
                 </TouchableOpacity>
               </ScrollView>
             </View>
