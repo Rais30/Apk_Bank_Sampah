@@ -8,7 +8,7 @@ export default StyleSheet.create({
   head: {
     width: '100%',
     flexDirection: 'row',
-    backgroundColor: '#00c853',
+    backgroundColor: '#76d275',
   },
   gambar: {
     width: 40,
@@ -29,8 +29,8 @@ export default StyleSheet.create({
   box: {
     width: '100%',
     // height: 200,
-    backgroundColor: '#76d275',
     // justifyContent: 'center',
+    backgroundColor: '#5efc82',
     alignSelf: 'center',
     // borderRadius: 15,
     elevation: 5,
@@ -57,7 +57,8 @@ export default StyleSheet.create({
   headers: {
     flexDirection: 'row',
     width: '100%',
-    backgroundColor: '#087f23',
+    backgroundColor: '#76d275',
+
     height: 50,
     alignItems: 'center',
   },

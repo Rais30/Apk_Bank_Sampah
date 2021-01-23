@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../../Components/Profil/boxProfil';
 
 export class Profil extends Component {
@@ -41,16 +42,6 @@ export class Profil extends Component {
       });
   }
 
-  roleId(role) {
-    if (role == '1') {
-      return <Text> Nasabah </Text>;
-    } else if (role == '2') {
-      return <Text> Pengurus 1 </Text>;
-    } else if (role == '3') {
-      return <Text> Pengurus 2 </Text>;
-    }
-  }
-
   componentDidMount() {
     AsyncStorage.getItem('token').then((token) => {
       if (token != null) {
@@ -76,24 +67,23 @@ export class Profil extends Component {
           <View>
             <View style={styles.loading}>
               <View style={styles.dataDiri}>
-                <Image
-                  source={{uri: this.state.dataKu.avatar}}
-                  style={styles.gambar}
-                />
+                <View style={styles.boxgambar}>
+                  <Image
+                    source={{uri: this.state.dataKu.avatar}}
+                    style={styles.gambar}
+                  />
+                </View>
 
                 <View style={styles.bioKu}>
                   <View>
                     <Text style={styles.teks}> {this.state.dataKu.name} </Text>
                   </View>
-                  <View>
-                    <Text style={styles.teks}> {this.state.dataKu.email}</Text>
-                  </View>
+
                   <View>
                     <Text style={styles.teks}>
                       {this.state.dataKu.phone_number}
                     </Text>
                   </View>
-                  <View>{this.roleId(this.state.dataKu.role_id)}</View>
                 </View>
               </View>
             </View>
@@ -101,21 +91,29 @@ export class Profil extends Component {
               <TouchableOpacity
                 style={styles.styleProfil}
                 onPress={() => this.props.navigation.navigate('EditPass')}>
+                <View style={{margin: 5, marginRight: 15}}>
+                  <Icon name="build" size={30} />
+                </View>
                 <Text
                   style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
                   Ubah Sandi
                 </Text>
               </TouchableOpacity>
-
               <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('Edit')}
                 style={styles.styleProfil}>
+                <View style={{margin: 5, marginRight: 15}}>
+                  <Icon name="build" size={30} />
+                </View>
                 <Text
                   style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
                   Edit Profil
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.styleProfil}>
+                <View style={{margin: 5, marginRight: 15}}>
+                  <Icon name="build" size={30} />
+                </View>
                 <Text
                   style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
                   Lupa Password
@@ -128,8 +126,7 @@ export class Profil extends Component {
                 style={styles.keluar}>
                 <Text
                   style={{fontSize: 30, fontWeight: 'bold', color: 'white'}}>
-                  {' '}
-                  Log Out{' '}
+                  Log Out
                 </Text>
               </TouchableOpacity>
             </View>

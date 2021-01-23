@@ -31,27 +31,7 @@ export class Home1 extends Component {
       }
     });
   }
-  saldoKu() {
-    const url = 'https://sammpah.herokuapp.com/api/getSaldo';
-    this.setState({loading: true});
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        Accept: 'aplication/json',
-        'Content-Type': 'aplication/json',
-        Authorization: `Bearer ${this.state.token}`,
-      },
-    })
-      .then((respon) => respon.json())
-      .then((resJson) => {
-        this.setState({saldo: resJson.data, loading: false});
-        console.log(resJson.data);
-      })
-      .catch((error) => {
-        console.log('error is' + error);
-        this.setState({loading: false});
-      });
-  }
+
   render() {
     return (
       <View style={styles.utama}>
@@ -74,7 +54,7 @@ export class Home1 extends Component {
           </TouchableOpacity>
         </View>
         <ScrollView>
-          <View style={{...styles.head, backgroundColor: '#087f23'}}>
+          <View style={styles.head}>
             <View style={styles.dataKu}>
               <View>
                 <Text

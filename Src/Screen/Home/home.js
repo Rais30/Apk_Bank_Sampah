@@ -144,17 +144,25 @@ export class Home extends Component {
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('Kontak')}
             style={styles.IconHead}>
-            <Icon name="question-answer" size={40} color="white" />
+            <Image
+              source={require('../../Assets/fotoLogo/icons8-new-contact-100.png')}
+              style={{width: 40, height: 40}}
+            />
           </TouchableOpacity>
         </View>
-        <ScrollView style={{backgroundColor: '#00c853'}}>
+        <ScrollView>
           <View style={styles.head}>
             <View style={styles.dataKu}>
               <View>
-                <Text style={{fontSize: 23}}>Rais Azaria Aryguna</Text>
+                <Text
+                  style={{fontSize: 25, fontWeight: 'bold', color: 'white'}}>
+                  Rais Azaria Aryguna
+                </Text>
               </View>
               <View>
-                <Text style={{fontSize: 15}}>raisazaria30@gmail.com</Text>
+                <Text style={{fontSize: 18, color: 'white'}}>
+                  raisazaria30@gmail.com
+                </Text>
               </View>
             </View>
           </View>
@@ -178,17 +186,26 @@ export class Home extends Component {
                 <TouchableOpacity
                   onPress={() => this.props.navigation.navigate('Penjemputan')}
                   style={styles.boxFitur}>
-                  <Text>penjemputan sampah</Text>
+                  <Image
+                    source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                    style={{height: 65, width: 65}}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.props.navigation.navigate('Tabungan')}
                   style={styles.boxFitur}>
-                  <Text>buku tabungan</Text>
+                  <Image
+                    source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                    style={{height: 65, width: 65}}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.props.navigation.navigate('TarikSaldo')}
                   style={styles.boxFitur}>
-                  <Text>penaria saldo</Text>
+                  <Image
+                    source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                    style={{height: 65, width: 65}}
+                  />
                 </TouchableOpacity>
               </ScrollView>
             </View>

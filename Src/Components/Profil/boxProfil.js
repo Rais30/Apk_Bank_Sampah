@@ -20,7 +20,7 @@ export default StyleSheet.create({
     // height: 160,
     width: '100%',
     // marginTop: 30,
-    padding: 17,
+    padding: 5,
     // borderRadius: 15,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
@@ -44,16 +44,20 @@ export default StyleSheet.create({
   styleProfil: {
     margin: 5,
     borderRadius: 5,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     padding: 5,
     backgroundColor: '#4caf50',
     height: 50,
-    // alignItems: 'center',
-    paddingLeft: 20,
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   boxSetting: {
     marginTop: 25,
     width: '97%',
     alignSelf: 'center',
+  },
+  boxgambar: {
+    marginTop: 15,
+    marginLeft: 15,
   },
 });
