@@ -49,10 +49,9 @@ export default StyleSheet.create({
     padding: 5,
   },
   boxFitur: {
-    width: 60,
-    height: 60,
-    // backgroundColor: '',
+    backgroundColor: '#FFDB58',
     margin: 10,
+    borderRadius: 5,
   },
   headers: {
     flexDirection: 'row',

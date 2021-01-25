@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import styles from '../../Components/BoxSetor/boxSetor';
 
-export default class SetorSampah extends Component {
+export class JualSampah extends Component {
   constructor() {
     super();
     this.state = {
@@ -23,7 +23,7 @@ export default class SetorSampah extends Component {
       jenis_sampah: '',
       idSampah: '',
       hargaSampah: '',
-      email: '',
+      harga: '',
     };
   }
   componentDidMount() {
@@ -80,19 +80,7 @@ export default class SetorSampah extends Component {
                 Jenis Sampah : {this.state.jenis_sampah}
               </Text>
             </View>
-            <View
-              style={{
-                backgroundColor: 'white',
-                width: '90%',
-                padding: 10,
-                elevation: 5,
-                borderRadius: 5,
-                marginBottom: 5,
-              }}>
-              <Text style={{fontSize: 15}}>
-                Harga Sampah /kg : {this.state.hargaSampah}
-              </Text>
-            </View>
+
             <View
               style={{
                 backgroundColor: 'white',
@@ -120,12 +108,12 @@ export default class SetorSampah extends Component {
                 alignSelf: 'center',
               }}>
               <TextInput
-                placeholder={'Email'}
+                placeholder={'harga'}
                 keyboardType="name-phone-pad"
-                onChangeText={(text) => this.setState({email: text})}
+                onChangeText={(text) => this.setState({harga: text})}
               />
             </View>
-            <TouchableNativeFeedback onPress={() => this.SetorPenjemputan()}>
+            <TouchableNativeFeedback onPress={() => this.JualSampah()}>
               {this.state.loading ? (
                 <View>
                   <ActivityIndicator size={35} />
@@ -140,7 +128,7 @@ export default class SetorSampah extends Component {
                     borderRadius: 7,
                   }}>
                   <Text style={{fontSize: 25, color: 'white'}}>
-                    Setor Sampah
+                    Jual Sampah
                   </Text>
                 </View>
               )}
@@ -150,16 +138,16 @@ export default class SetorSampah extends Component {
       </View>
     );
   }
-  SetorPenjemputan() {
+  JualSampah() {
     console.log('setor sampah');
-    const {idSampah, berat, email} = this.state;
+    const {idSampah, berat, harga} = this.state;
     const data = {
       jenis_sampah: idSampah,
       berat: berat,
-      email: email,
+      harga: harga,
     };
 
-    const url = `https://sammpah.herokuapp.com/api/setor`;
+    const url = `https://sammpah.herokuapp.com/api/sell`;
     this.setState({loading: true});
     fetch(url, {
       method: 'POST',
@@ -180,11 +168,16 @@ export default class SetorSampah extends Component {
             ToastAndroid.SHORT,
             ToastAndroid.CENTER,
             // console.log(resJson),
-            this.props.navigation.navigate('Home1'),
+            this.props.navigation.navigate('Home2'),
           );
           this.setState({loading: false});
-        } else if (message == 'No query results for model [App\\User].') {
-          alert('Mohon periksa data yang anda masukkan lagi');
+        } else if (message == 'sampah anda kurang') {
+          ToastAndroid.show(
+            ' Sampah anda Kurang',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+            // console.log(resJson),
+          );
           this.setState({loading: false});
         } else {
           console.log('ini apa ', status);
@@ -200,7 +193,7 @@ export default class SetorSampah extends Component {
     return (
       <View style={styles.utama}>
         <View style={styles.headers}>
-          <Text style={{fontSize: 30, color: 'white'}}> Setor Sampah </Text>
+          <Text style={{fontSize: 30, color: 'white'}}> Penjualan Sampah </Text>
         </View>
         <View>
           <ScrollView>
@@ -233,7 +226,6 @@ export default class SetorSampah extends Component {
                         onPress={() =>
                           this.setState({
                             jenis_sampah: val.jenis_sampah,
-                            hargaSampah: val.harga,
                             idSampah: val.id,
                           })
                         }>
@@ -265,3 +257,5 @@ export default class SetorSampah extends Component {
     );
   }
 }
+
+export default JualSampah;

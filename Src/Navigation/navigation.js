@@ -2,8 +2,6 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-// import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-// import Icon from 'react-native-vector-icons/MaterialIcons';
 import Home from '../Screen/Home/home';
 import Login from '../Screen/LogIn/login';
 import Profil from '../Screen/Profil/profil';
@@ -25,6 +23,8 @@ import Home2 from '../Screen/Home/home2';
 import Jemput from '../Screen/Menjemputan/Jemput';
 import Kontak from '../Screen/Kontak/Kontak';
 import SetorSampah from '../Screen/SetorSampah/Demo';
+import HistoryPenjual from '../Screen/HistoryPenjual/HistoryPenjual';
+import JualSampah from '../Screen/Penjualan/jualSampah';
 
 // const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -73,6 +73,8 @@ class Navigation extends React.Component {
           <Stack.Screen name="Jemput" component={Jemput} />
           <Stack.Screen name="Kontak" component={Kontak} />
           <Stack.Screen name="SetorSampah" component={SetorSampah} />
+          <Stack.Screen name="HistoriPenjual" component={HistoryPenjual} />
+          <Stack.Screen name="JualSampah" component={JualSampah} />
         </Stack.Navigator>
       </NavigationContainer>
     );

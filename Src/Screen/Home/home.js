@@ -211,14 +211,21 @@ export class Home extends Component {
             </View>
           </View>
           <View>
-            <View>
-              <Text> Riwanyat Penyetoran Sampah </Text>
+            <View
+              style={{
+                margin: 10,
+                padding: 5,
+                backgroundColor: '#76d275',
+                elevation: 5,
+                borderRadius: 5,
+              }}>
+              <Text style={{fontSize: 17, fontWeight: 'bold', color: 'white'}}>
+                Riwanyat Penyetoran Sampah
+              </Text>
             </View>
             <View>
-              {this.state.data == null ? (
-                <View>
-                  <Text>Anda tidak memiliki Riwanyat Penyetoran</Text>
-                </View>
+              {this.state.data == '' ? (
+                <View></View>
               ) : (
                 <View>
                   {this.state.data.map((val, key) => {
