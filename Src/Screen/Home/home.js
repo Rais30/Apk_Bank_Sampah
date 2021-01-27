@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   TouchableNativeFeedback,
+  ImageBackground,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../../Components/Home/BoxHome';
@@ -154,71 +155,92 @@ export class Home extends Component {
           <View style={styles.head}>
             <View style={styles.dataKu}>
               <View>
-                <Text
-                  style={{fontSize: 25, fontWeight: 'bold', color: 'white'}}>
+                <Text style={{fontSize: 25, fontWeight: 'bold'}}>
                   Rais Azaria Aryguna
                 </Text>
               </View>
               <View>
-                <Text style={{fontSize: 18, color: 'white'}}>
-                  raisazaria30@gmail.com
-                </Text>
+                <Text style={{fontSize: 18}}> Nasabah </Text>
               </View>
             </View>
           </View>
           <View style={styles.box}>
-            <View style={styles.boxsaldo}>
-              <View style={styles.saldo}>
-                <View style={{flexDirection: 'row'}}>
-                  <Icon name="account-balance-wallet" size={40} />
-                  <View style={{justifyContent: 'center'}}>
-                    {this.state.saldo == null ? (
-                      <Text style={{fontSize: 25}}> Rp.0 </Text>
-                    ) : (
-                      <Text style={{fontSize: 25}}>Rp.{this.state.saldo}</Text>
-                    )}
+            <ImageBackground
+              source={require('../../Assets/fotoLogo/wallpaperwiki Abstract Green Wallpaper HD PIC WPC002317.jpg')}
+              style={{width: '100%'}}>
+              <View style={styles.boxsaldo}>
+                <View style={styles.saldo}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Icon name="account-balance-wallet" size={40} />
+                    <View style={{justifyContent: 'center'}}>
+                      {this.state.saldo == null ? (
+                        <Text style={{fontSize: 25}}> Rp.0 </Text>
+                      ) : (
+                        <Text style={{fontSize: 25}}>
+                          Rp.{this.state.saldo}
+                        </Text>
+                      )}
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
-            <View style={{alignItems: 'center'}}>
-              <ScrollView horizontal={true}>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('Penjemputan')}
-                  style={styles.boxFitur}>
-                  <Image
-                    source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
-                    style={{height: 65, width: 65}}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('Tabungan')}
-                  style={styles.boxFitur}>
-                  <Image
-                    source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
-                    style={{height: 65, width: 65}}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('TarikSaldo')}
-                  style={styles.boxFitur}>
-                  <Image
-                    source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
-                    style={{height: 65, width: 65}}
-                  />
-                </TouchableOpacity>
-              </ScrollView>
-            </View>
+              <View style={{alignItems: 'center'}}>
+                <ScrollView horizontal={true}>
+                  <View style={styles.fitur}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.props.navigation.navigate('Penjemputan')
+                      }
+                      style={styles.boxFitur}>
+                      <Image
+                        source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                        style={{height: 65, width: 65}}
+                      />
+                    </TouchableOpacity>
+                    <View style={{marginBottom: 5}}>
+                      <Text style={{color: 'white', fontWeight: 'bold'}}>
+                        Setor Sampah
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.fitur}>
+                    <TouchableOpacity
+                      onPress={() => this.props.navigation.navigate('Tabungan')}
+                      style={styles.boxFitur}>
+                      <Image
+                        source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                        style={{height: 65, width: 65}}
+                      />
+                    </TouchableOpacity>
+                    <View style={{marginBottom: 5}}>
+                      <Text style={{color: 'white', fontWeight: 'bold'}}>
+                        Tabungan
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.fitur}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        this.props.navigation.navigate('TarikSaldo')
+                      }
+                      style={styles.boxFitur}>
+                      <Image
+                        source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                        style={{height: 65, width: 65}}
+                      />
+                    </TouchableOpacity>
+                    <View style={{marginBottom: 5}}>
+                      <Text style={{color: 'white', fontWeight: 'bold'}}>
+                        Penarikan
+                      </Text>
+                    </View>
+                  </View>
+                </ScrollView>
+              </View>
+            </ImageBackground>
           </View>
           <View>
-            <View
-              style={{
-                margin: 10,
-                padding: 5,
-                backgroundColor: '#76d275',
-                elevation: 5,
-                borderRadius: 5,
-              }}>
+            <View style={styles.tittel}>
               <Text style={{fontSize: 17, fontWeight: 'bold', color: 'white'}}>
                 Riwanyat Penyetoran Sampah
               </Text>
@@ -227,7 +249,7 @@ export class Home extends Component {
               {this.state.data == '' ? (
                 <View></View>
               ) : (
-                <View>
+                <View style={styles.mapku}>
                   {this.state.data.map((val, key) => {
                     return (
                       <View key={key} style={styles.dataMap}>

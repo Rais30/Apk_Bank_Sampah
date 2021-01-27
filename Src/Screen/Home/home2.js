@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  TouchableNativeFeedback,
 } from 'react-native';
 import styles from '../../Components/Home/BoxHome';
 
@@ -69,22 +70,18 @@ export class Home2 extends Component {
           <View style={styles.head}>
             <View style={styles.dataKu}>
               <View>
-                <Text
-                  style={{fontSize: 25, color: 'white', fontWeight: 'bold'}}>
+                <Text style={{fontSize: 25, fontWeight: 'bold'}}>
                   Pengurus 2
                 </Text>
               </View>
               <View>
-                <Text
-                  style={{fontSize: 18, color: 'white', fontWeight: 'bold'}}>
-                  pengurus2@gmail.com
-                </Text>
+                <Text style={{fontSize: 18}}>pengurus2@gmail.com</Text>
               </View>
             </View>
           </View>
           <View style={styles.box}>
-            <View style={{alignItems: 'center'}}>
-              <ScrollView horizontal={true}>
+            <ScrollView horizontal={true}>
+              <View>
                 <TouchableOpacity
                   onPress={() => this.props.navigation.navigate('JualSampah')}
                   style={styles.boxFitur}>
@@ -93,27 +90,15 @@ export class Home2 extends Component {
                     style={{width: 65, height: 65}}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() =>
-                    this.props.navigation.navigate('HistoriPenjual')
-                  }
-                  style={styles.boxFitur}>
-                  <Image
-                    source={require('../../Assets/fotoLogo/icons8-order-history-96-2.png')}
-                    style={{width: 65, height: 55}}
-                  />
-                </TouchableOpacity>
-              </ScrollView>
-            </View>
+                <View style={{marginBottom: 5}}>
+                  <Text style={{color: 'white', fontWeight: 'bold'}}>
+                    Jual Sampah
+                  </Text>
+                </View>
+              </View>
+            </ScrollView>
           </View>
-          <View
-            style={{
-              padding: 5,
-              margin: 10,
-              backgroundColor: '#76d275',
-              elevation: 5,
-              borderRadius: 5,
-            }}>
+          <View style={styles.tittel}>
             <Text style={{fontWeight: 'bold', fontSize: 20, color: 'white'}}>
               Gudang SampaH
             </Text>
@@ -124,82 +109,58 @@ export class Home2 extends Component {
                 <ActivityIndicator size={40} />
               </View>
             ) : (
-              <View
-                style={{
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  justifyContent: 'center',
-                  // alignItems: 'center',
-                }}>
+              <View style={styles.mapku}>
                 {this.state.sampah.map((val, key) => {
                   return (
-                    <View
-                      onPress={() =>
-                        this.setState({
-                          jenis_sampah: val.jenis_sampah,
-                          hargaSampah: val.harga,
-                          idSampah: val.id,
-                        })
-                      }>
+                    <View>
                       <View key={key}>
+                        <View>
+                          <Image
+                            source={{uri: val.jenis.image}}
+                            style={{width: 150, height: 150}}
+                          />
+                        </View>
                         <View
                           style={{
-                            margin: 5,
                             padding: 5,
-                            backgroundColor: 'white',
-                            elevation: 5,
-                            borderRadius: 10,
+                            flexDirection: 'row',
                           }}>
-                          <View>
-                            <Image
-                              source={{uri: val.jenis.image}}
-                              style={{width: 150, height: 150}}
-                            />
+                          <Image
+                            source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                            style={{height: 40, width: 40}}
+                          />
+                          <View style={{justifyContent: 'center'}}>
+                            <Text style={{fontSize: 15}}>
+                              {val.jenis.jenis_sampah}
+                            </Text>
                           </View>
-                          <View
-                            style={{
-                              padding: 5,
-                              flexDirection: 'row',
-                            }}>
-                            <Image
-                              source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
-                              style={{height: 40, width: 40}}
-                            />
-                            <View style={{justifyContent: 'center'}}>
-                              <Text style={{fontSize: 15}}>
-                                {val.jenis.jenis_sampah}
-                              </Text>
-                            </View>
+                        </View>
+                        <View
+                          style={{
+                            padding: 5,
+                            flexDirection: 'row',
+                          }}>
+                          <Image
+                            source={require('../../Assets/fotoLogo/icons8-note-100.png')}
+                            style={{height: 40, width: 40}}
+                          />
+                          <View style={{justifyContent: 'center'}}>
+                            <Text style={{fontSize: 15}}>{val.berat} /Kg</Text>
                           </View>
-                          <View
-                            style={{
-                              padding: 5,
-                              flexDirection: 'row',
-                            }}>
-                            <Image
-                              source={require('../../Assets/fotoLogo/icons8-note-100.png')}
-                              style={{height: 40, width: 40}}
-                            />
-                            <View style={{justifyContent: 'center'}}>
-                              <Text style={{fontSize: 15}}>
-                                {val.berat} /Kg
-                              </Text>
-                            </View>
-                          </View>
-                          <View
-                            style={{
-                              padding: 5,
-                              flexDirection: 'row',
-                            }}>
-                            <Image
-                              source={require('../../Assets/fotoLogo/icons8-note-100.png')}
-                              style={{height: 40, width: 40}}
-                            />
-                            <View style={{justifyContent: 'center'}}>
-                              <Text style={{fontSize: 15}}>
-                                Rp.{val.jenis.harga} ,-
-                              </Text>
-                            </View>
+                        </View>
+                        <View
+                          style={{
+                            padding: 5,
+                            flexDirection: 'row',
+                          }}>
+                          <Image
+                            source={require('../../Assets/fotoLogo/icons8-note-100.png')}
+                            style={{height: 40, width: 40}}
+                          />
+                          <View style={{justifyContent: 'center'}}>
+                            <Text style={{fontSize: 15}}>
+                              Rp.{val.jenis.harga} ,-
+                            </Text>
                           </View>
                         </View>
                       </View>

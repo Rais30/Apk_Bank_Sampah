@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 // import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../../Components/Home/BoxHome';
-AsyncStorage;
 
 export class Home1 extends Component {
   constructor() {
@@ -57,37 +56,50 @@ export class Home1 extends Component {
           <View style={styles.head}>
             <View style={styles.dataKu}>
               <View>
-                <Text
-                  style={{fontSize: 25, fontWeight: 'bold', color: 'white'}}>
+                <Text style={{fontSize: 25, fontWeight: 'bold'}}>
                   Pengurus 1
                 </Text>
               </View>
               <View>
-                <Text style={{fontSize: 18, color: 'white'}}>
-                  raisazaria30@gmail.com
-                </Text>
+                <Text style={{fontSize: 18}}>pengurus1@gmail.com</Text>
               </View>
             </View>
           </View>
           <View style={styles.box}>
             <View style={{alignItems: 'center'}}>
               <ScrollView horizontal={true}>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('SetorSampah')}
-                  style={styles.boxFitur}>
-                  <Image
-                    source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
-                    style={{height: 65, width: 65}}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('Jemput')}
-                  style={styles.boxFitur}>
-                  <Image
-                    source={require('../../Assets/fotoLogo/icons8-new-message-100.png')}
-                    style={{width: 60, height: 60}}
-                  />
-                </TouchableOpacity>
+                <View style={{margin: 5}}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate('SetorSampah')
+                    }
+                    style={styles.boxFitur}>
+                    <Image
+                      source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                      style={{height: 65, width: 65}}
+                    />
+                  </TouchableOpacity>
+                  <View style={{marginBottom: 5}}>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>
+                      Setor Sampah
+                    </Text>
+                  </View>
+                </View>
+                <View style={{margin: 5}}>
+                  <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('Jemput')}
+                    style={styles.boxFitur}>
+                    <Image
+                      source={require('../../Assets/fotoLogo/icons8-new-message-100.png')}
+                      style={{width: 65, height: 65}}
+                    />
+                  </TouchableOpacity>
+                  <View style={{marginBottom: 5}}>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>
+                      Penjemputan
+                    </Text>
+                  </View>
+                </View>
               </ScrollView>
             </View>
           </View>

@@ -73,16 +73,13 @@ export class Profil extends Component {
                     style={styles.gambar}
                   />
                 </View>
-
                 <View style={styles.bioKu}>
                   <View>
                     <Text style={styles.teks}> {this.state.dataKu.name} </Text>
                   </View>
 
                   <View>
-                    <Text style={styles.teks}>
-                      {this.state.dataKu.phone_number}
-                    </Text>
+                    <Text style={styles.teks}>{this.state.dataKu.email}</Text>
                   </View>
                 </View>
               </View>
