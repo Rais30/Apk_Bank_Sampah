@@ -10,8 +10,9 @@ export default StyleSheet.create({
     backgroundColor: 'white',
   },
   title: {
-    fontSize: 25,
+    fontSize: 27,
     padding: 7,
+    color: 'white',
   },
   Input: {
     backgroundColor: 'white',
@@ -34,16 +35,19 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
+    marginBottom: 50,
   },
   image: {
-    height: 300,
-    width: 300,
-    backgroundColor: '#C0C0C0',
+    height: 250,
+    width: 250,
+    backgroundColor: 'white',
     margin: 10,
+    borderRadius: 5,
+    elevation: 5,
   },
   gambar: {
-    height: 300,
-    width: 300,
+    height: 230,
+    width: 230,
   },
   headers: {
     width: '100%',
@@ -51,5 +55,15 @@ export default StyleSheet.create({
     backgroundColor: '#388e3c',
     alignItems: 'center',
     marginBottom: 5,
+  },
+  boxMap: {
+    padding: 5,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    elevation: 3,
+  },
+  map: {
+    height: 300,
+    width: 300,
   },
 });

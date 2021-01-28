@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {Component} from 'react';
-import {Text, View, ActivityIndicator, ScrollView} from 'react-native';
+import {Text, View, ActivityIndicator, ScrollView, Image} from 'react-native';
 import styles from '../../Components/Tabungan/BoxTabungan';
 
 export class Tabungan extends Component {
@@ -65,18 +65,49 @@ export class Tabungan extends Component {
                 <View>
                   {this.state.data.map((val, key) => {
                     return (
-                      <View key={key} style={{}}>
-                        <View>
-                          <Text>{val.created_at}</Text>
+                      <View
+                        key={key}
+                        style={{
+                          padding: 5,
+                          backgroundColor: 'white',
+                          margin: 5,
+                          elevation: 3,
+                        }}>
+                        <View style={styles.Tabungan}>
+                          <Image
+                            source={require('../../Assets/fotoLogo/icons8-note-100.png')}
+                            style={styles.icons}
+                          />
+                          <View style={styles.dataTabungan}>
+                            <Text>{val.debit}</Text>
+                          </View>
                         </View>
-                        <View>
-                          <Text>{val.debit}</Text>
+                        <View style={styles.Tabungan}>
+                          <Image
+                            source={require('../../Assets/fotoLogo/icons8-note-100.png')}
+                            style={styles.icons}
+                          />
+                          <View style={styles.dataTabungan}>
+                            <Text>{val.kredit}</Text>
+                          </View>
                         </View>
-                        <View>
-                          <Text>{val.keterangan}</Text>
+                        <View style={styles.Tabungan}>
+                          <Image
+                            source={require('../../Assets/fotoLogo/icons8-note-100.png')}
+                            style={styles.icons}
+                          />
+                          <View style={styles.dataTabungan}>
+                            <Text>{val.saldo}</Text>
+                          </View>
                         </View>
-                        <View>
-                          <Text>{val.saldo}</Text>
+                        <View style={styles.Tabungan}>
+                          <Image
+                            source={require('../../Assets/fotoLogo/icons8-note-100.png')}
+                            style={styles.icons}
+                          />
+                          <View style={styles.dataTabungan}>
+                            <Text>{val.keterangan}</Text>
+                          </View>
                         </View>
                       </View>
                     );

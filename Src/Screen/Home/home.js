@@ -193,13 +193,13 @@ export class Home extends Component {
                       }
                       style={styles.boxFitur}>
                       <Image
-                        source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                        source={require('../../Assets/fotoLogo/icons8-truck-100.png')}
                         style={{height: 65, width: 65}}
                       />
                     </TouchableOpacity>
                     <View style={{marginBottom: 5}}>
                       <Text style={{color: 'white', fontWeight: 'bold'}}>
-                        Setor Sampah
+                        Penjemputan
                       </Text>
                     </View>
                   </View>
@@ -225,7 +225,7 @@ export class Home extends Component {
                       }
                       style={styles.boxFitur}>
                       <Image
-                        source={require('../../Assets/fotoLogo/icons8-trash-100.png')}
+                        source={require('../../Assets/fotoLogo/icons8-credit-card-interest-100.png')}
                         style={{height: 65, width: 65}}
                       />
                     </TouchableOpacity>
@@ -254,22 +254,22 @@ export class Home extends Component {
                     return (
                       <View key={key} style={styles.dataMap}>
                         <View>
-                          <Text> Alamat Penjemputan = {val.address}</Text>
+                          <Image
+                            source={{uri: val.image}}
+                            style={styles.imageSampah}
+                          />
+                        </View>
+                        <View>
+                          <Text> Alamat = {val.address}</Text>
+                        </View>
+                        <View>
+                          <Text> Nomer = {val.phone_number}</Text>
                         </View>
                         <View>
                           <Text> Keterangan = {val.description}</Text>
                         </View>
                         <View>
                           <Text> Permintaan = {val.created_at}</Text>
-                        </View>
-                        <View>
-                          <Text> Nomer = {val.phone_number}</Text>
-                        </View>
-                        <View>
-                          <Image
-                            source={{uri: val.image}}
-                            style={styles.imageSampah}
-                          />
                         </View>
                         <View style={{margin: 10}}>
                           {this.statusBarang(val.status, (id = 4), val.user_id)}

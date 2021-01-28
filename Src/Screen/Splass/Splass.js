@@ -40,9 +40,6 @@ export class Splass extends Component {
         <View>
           <Text style={styles.teksView}> sammpaH </Text>
         </View>
-        <View>
-          <ActivityIndicator color="#52D017" size={40} />
-        </View>
       </View>
     );
   }

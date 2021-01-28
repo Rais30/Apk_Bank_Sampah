@@ -150,7 +150,12 @@ export class Penjemputan extends Component {
         this.setState({address: resJson.display_name});
       })
       .catch((error) => {
-        console.log('error is' + error);
+        ToastAndroid.show(
+          ' Tidak ada Jaringan ',
+          ToastAndroid.SHORT,
+          ToastAndroid.CENTER,
+          console.log('tidak ada alamat' + error),
+        );
         this.setState({loading: false});
       });
   }
@@ -158,7 +163,7 @@ export class Penjemputan extends Component {
   render() {
     return (
       <View style={styles.urama}>
-        <View style={styles.head}>
+        <View style={styles.headers}>
           <Text style={styles.title}> Penyetoran Sampah </Text>
         </View>
         <ScrollView>
@@ -172,7 +177,9 @@ export class Penjemputan extends Component {
                   source={{uri: this.state.image.uri}}
                 />
               ) : (
-                <Text style={{fontSize: 33}}>foto sampah Kamu</Text>
+                <View style={{marginTop: 110, alignSelf: 'center'}}>
+                  <Text style={{fontSize: 28}}>foto Sampah</Text>
+                </View>
               )}
             </TouchableOpacity>
             <View style={styles.Input}>
@@ -189,7 +196,7 @@ export class Penjemputan extends Component {
                 onChangeText={(text) => this.setState({description: text})}
               />
             </View>
-            <View>
+            <View style={styles.boxMap}>
               {this.state.longitude == '' ? (
                 <ActivityIndicator size={50} color="red" />
               ) : (
@@ -203,7 +210,7 @@ export class Penjemputan extends Component {
                   showsUserLocation
                   showsMyLocationButton
                   provider={PROVIDER_GOOGLE}
-                  style={{height: 350, width: 350}}></MapView>
+                  style={styles.map}></MapView>
               )}
             </View>
             <View style={{...styles.Input, height: 75, padding: 10}}>

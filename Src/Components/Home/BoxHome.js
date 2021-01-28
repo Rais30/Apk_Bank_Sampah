@@ -4,9 +4,7 @@ export default StyleSheet.create({
   utama: {
     flex: 1,
     padding: 5,
-    width: '100%',
     backgroundColor: 'white',
-    // backgroundColor: '#00c853',
   },
   head: {
     width: '100%',
