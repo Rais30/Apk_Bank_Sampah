@@ -134,7 +134,9 @@ export class Login extends Component {
             </Text>
           </View>
           <View>
-            <Text style={{...styles.textSaya, marginLeft: 90}}>
+            <Text
+              style={{...styles.textSaya, marginLeft: 90}}
+              onPress={() => this.props.navigation.navigate('LupPass')}>
               Lupa Password
             </Text>
           </View>

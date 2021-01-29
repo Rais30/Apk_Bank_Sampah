@@ -33,12 +33,12 @@ export class Penjemputan extends Component {
   setorSampah = () => {
     console.log('setor sampah');
 
-    const {name, phone_number, image, address} = this.state;
-    const url = 'https://sammpah.herokuapp.com/api/profile';
+    const {address, phone_number, image, description} = this.state;
+    const url = 'https://sammpah.herokuapp.com/api/jemput';
     const data = {
-      name: name,
-      phone_number: phone_number,
       address: address,
+      phone_number: phone_number,
+      description: description,
     };
     this.setState({loading: true});
     // console.log(this.state.token);
@@ -53,11 +53,11 @@ export class Penjemputan extends Component {
     })
       .then((respon) => respon.json())
       .then((resJson) => {
-        console.log('ini respon pennyetoransampah', resJson);
+        console.log('ini respon pennyetoran Sampah', resJson);
         const {status} = resJson;
         if (status == 'Success') {
           ToastAndroid.show(
-            ' Berhasil',
+            'Menyetoran Bersil',
             ToastAndroid.SHORT,
             ToastAndroid.CENTER,
             console.log(resJson),
@@ -198,7 +198,7 @@ export class Penjemputan extends Component {
             </View>
             <View style={styles.boxMap}>
               {this.state.longitude == '' ? (
-                <ActivityIndicator size={50} color="red" />
+                <View></View>
               ) : (
                 <MapView
                   region={{

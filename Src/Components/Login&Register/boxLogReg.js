@@ -63,7 +63,4 @@ export default StyleSheet.create({
     marginLeft: 15,
     color: '#2B65EC',
   },
-  Akun: {
-    // marginTop: 10,
-  },
 });

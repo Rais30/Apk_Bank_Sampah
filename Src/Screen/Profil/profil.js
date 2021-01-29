@@ -112,6 +112,7 @@ export class Profil extends Component {
                   <Icon name="build" size={30} />
                 </View>
                 <Text
+                  onPress={() => this.props.navigation.navigate('LupPass')}
                   style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
                   Lupa Password
                 </Text>

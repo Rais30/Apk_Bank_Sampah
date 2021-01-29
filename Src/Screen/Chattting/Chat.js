@@ -7,10 +7,10 @@ import {
   ScrollView,
   TextInput,
   ActivityIndicator,
-  Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Pusher from 'pusher-js/react-native';
+import {add} from 'react-native-reanimated';
 
 export class Chat extends Component {
   constructor() {
@@ -47,7 +47,7 @@ export class Chat extends Component {
         if (status == 'Success') {
           this.setState({loading: false});
           console.log('pesan berasil di kirim');
-          this.add();
+          this.getPesan();
         } else {
           console.log('ada errpr di sini');
           this.setState({loading: false});
@@ -57,7 +57,7 @@ export class Chat extends Component {
       .catch((err) => console.log('Terjadi kesalahan. ' + err));
   };
 
-  add = (token) => {
+  getPesan = () => {
     console.log('add pesan');
     const url = `https://sammpah.herokuapp.com/api/chat/${this.props.route.params.user_id}`;
     this.setState({loading: true});
@@ -85,21 +85,15 @@ export class Chat extends Component {
   };
   componentDidMount() {
     AsyncStorage.getItem('user').then((user) => {
-      if (user != null) {
-        this.setState({user: user});
-        console.log('ini id user member', this.state.user);
-        AsyncStorage.getItem('token').then((token) => {
-          if (token != null) {
-            this.setState({token: token});
-            console.log('token ada');
-            this.add(token);
-          } else {
-            console.log('token tidak ada');
-          }
-        });
-      } else {
-        console.log('user ID tidak ada');
-      }
+      AsyncStorage.getItem('token').then((token) => {
+        if (token != null) {
+          this.setState({token: token});
+          console.log(this.state.token);
+          this.getPesan();
+        } else {
+          console.log('token tidak ada');
+        }
+      });
     });
     Pusher.logToConsole = true;
 
@@ -108,14 +102,13 @@ export class Chat extends Component {
     });
 
     var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function (data) {
-      console.log(JSON.stringify(data));
+    channel.bind('my-event', (data) => {
+      console.log('ini data baru ', JSON.stringify(data));
+      this.getPesan();
     });
   }
 
   render() {
-    // console.log('ini id user', this.props.route.params.user_id);
-
     return (
       <View style={{flex: 1}}>
         <View style={styles.header}>
@@ -175,8 +168,8 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 50,
-    backgroundColor: '#1589FF',
+    padding: 5,
+    backgroundColor: '#388e3c',
     elevation: 5,
     alignItems: 'center',
     justifyContent: 'center',
@@ -184,11 +177,12 @@ const styles = StyleSheet.create({
   Tittel: {
     fontWeight: 'bold',
     fontSize: 30,
+    color: 'white',
   },
   textSend: {
     backgroundColor: '#4CC417',
-    padding: 5,
-    borderRadius: 10,
+    padding: 7,
+    borderRadius: 3,
     marginTop: 5,
     margin: 5,
     alignSelf: 'flex-end',
@@ -199,7 +193,7 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: 'row',
     elevation: 5,
-    backgroundColor: '#82CAFA',
+    backgroundColor: '#5FFB17',
     justifyContent: 'center',
   },
   textMasuk: {
@@ -211,8 +205,8 @@ const styles = StyleSheet.create({
   },
   getText: {
     backgroundColor: 'white',
-    padding: 5,
-    borderRadius: 5,
+    padding: 7,
+    borderRadius: 3,
     margin: 5,
     alignSelf: 'flex-start',
     maxWidth: '85%',

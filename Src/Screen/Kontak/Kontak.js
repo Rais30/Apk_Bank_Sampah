@@ -106,7 +106,7 @@ class Kontak extends Component {
                         )}
                       </>
                       <View style={styles.viewTeks}>
-                        <Text>{val.name}</Text>
+                        <Text style={{fontSize: 17}}>{val.name}</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -125,8 +125,8 @@ const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: 50,
-    backgroundColor: 'white',
+    padding: 5,
+    backgroundColor: '#388e3c',
     elevation: 5,
     alignItems: 'center',
     justifyContent: 'center',
@@ -134,12 +134,15 @@ const styles = StyleSheet.create({
   Tittel: {
     fontWeight: 'bold',
     fontSize: 30,
+    color: 'white',
   },
 
   viewImage: {
     width: 65,
     height: 65,
     borderRadius: 33,
+    alignSelf: 'center',
+    marginLeft: 5,
   },
   boxPesan: {
     width: '100%',
@@ -147,43 +150,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 3,
     flexDirection: 'row',
-    marginTop: 5,
-  },
-  loginRegister: {
-    width: '90%',
-    height: 190,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    marginTop: 90,
-    marginLeft: 18,
-    elevation: 10,
-  },
-  BoxImage: {
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    alignSelf: 'center',
-    top: 50,
-    borderWidth: 7,
-    borderColor: '#3462f9',
-    marginTop: -95,
-    borderWidth: 7,
     margin: 5,
   },
-  posisenLogin: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 80,
-  },
-  boxLoginRegister: {
-    width: '40%',
-    height: 50,
+  viewTeks: {
     margin: 5,
-    borderRadius: 20,
   },
 });
 export default Kontak;

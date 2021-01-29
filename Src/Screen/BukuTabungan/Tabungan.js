@@ -109,6 +109,15 @@ export class Tabungan extends Component {
                             <Text>{val.keterangan}</Text>
                           </View>
                         </View>
+                        <View style={styles.Tabungan}>
+                          <Image
+                            source={require('../../Assets/fotoLogo/icons8-note-100.png')}
+                            style={styles.icons}
+                          />
+                          <View style={styles.dataTabungan}>
+                            <Text>{val.created_at}</Text>
+                          </View>
+                        </View>
                       </View>
                     );
                   })}

@@ -3,7 +3,6 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   utama: {
     flex: 1,
-    backgroundColor: '#00c853',
   },
   loading: {
     alignItems: 'center',
@@ -11,12 +10,13 @@ export default StyleSheet.create({
   gambar: {
     width: 70,
     height: 70,
-    backgroundColor: '#00701a',
+    // backgroundColor: '#00701a',
     borderRadius: 35,
   },
   dataDiri: {
     // flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#00c853',
+
     // height: 160,
     width: '100%',
     // marginTop: 30,

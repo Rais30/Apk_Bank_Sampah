@@ -44,10 +44,11 @@ export default StyleSheet.create({
     margin: 10,
     borderRadius: 5,
     elevation: 5,
+    alignSelf: 'center',
   },
   gambar: {
-    height: 230,
-    width: 230,
+    height: 250,
+    width: 250,
   },
   headers: {
     width: '100%',
