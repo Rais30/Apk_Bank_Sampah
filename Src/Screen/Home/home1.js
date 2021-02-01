@@ -34,25 +34,26 @@ export class Home1 extends Component {
   render() {
     return (
       <View style={styles.utama}>
-        <View style={styles.headers}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer()}
-            style={{...styles.boxgambar, marginRight: '68%'}}>
-            <Image
-              source={require('../../Assets/fotoLogo/recycle-icon-5.jpg')}
-              style={styles.gambar}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Kontak')}
-            style={styles.IconHead}>
-            <Image
-              source={require('../../Assets/fotoLogo/icons8-new-contact-100.png')}
-              style={{width: 40, height: 40}}
-            />
-          </TouchableOpacity>
-        </View>
         <ScrollView>
+          <View style={styles.headers}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer()}
+              style={{...styles.boxgambar, marginRight: '68%'}}>
+              <Image
+                source={require('../../Assets/fotoLogo/recycle-icon-5.jpg')}
+                style={styles.gambar}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Kontak')}
+              style={styles.IconHead}>
+              <Image
+                source={require('../../Assets/fotoLogo/icons8-new-contact-100.png')}
+                style={{width: 40, height: 40}}
+              />
+            </TouchableOpacity>
+          </View>
+
           <View style={styles.head}>
             <View style={styles.dataKu}>
               <View>

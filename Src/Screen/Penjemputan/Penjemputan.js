@@ -7,12 +7,11 @@ import {
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
-  Linking,
   ToastAndroid,
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import styles from '../../Components/BoxSetor/boxSetor';
-import {launchCamera} from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Geolocation from 'react-native-geolocation-service';
 export class Penjemputan extends Component {
@@ -66,8 +65,13 @@ export class Penjemputan extends Component {
           this.setState({loading: false});
           // this.props.navigation.navigate('Home');
         } else {
-          console.log('ada error bang');
-          alert('periksa kemabli data anda ');
+          console.log('ada error bang', resJson);
+          ToastAndroid.show(
+            'Periksa Data Anda',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+            console.log(resJson),
+          );
           this.setState({loading: false});
         }
       })
@@ -99,7 +103,7 @@ export class Penjemputan extends Component {
     const options = {
       noData: true,
     };
-    launchCamera(options, (response) => {
+    launchImageLibrary(options, (response) => {
       if (response.uri) {
         this.setState({image: response});
       }

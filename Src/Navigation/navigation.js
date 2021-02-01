@@ -26,6 +26,7 @@ import SetorSampah from '../Screen/SetorSampah/Demo';
 import HistoryPenjual from '../Screen/HistoryPenjual/HistoryPenjual';
 import JualSampah from '../Screen/Penjualan/jualSampah';
 import LupaPass from '../Screen/lupaPassword/LupaPass';
+import Lokasi from '../Screen/LokasiPenjemputan/Lokasi';
 
 // const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -77,6 +78,7 @@ class Navigation extends React.Component {
           <Stack.Screen name="HistoriPenjual" component={HistoryPenjual} />
           <Stack.Screen name="JualSampah" component={JualSampah} />
           <Stack.Screen name="LupPass" component={LupaPass} />
+          <Stack.Screen name="Lokasi" component={Lokasi} />
         </Stack.Navigator>
       </NavigationContainer>
     );

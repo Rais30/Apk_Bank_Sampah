@@ -89,10 +89,9 @@ export class Profil extends Component {
                 style={styles.styleProfil}
                 onPress={() => this.props.navigation.navigate('EditPass')}>
                 <View style={{margin: 5, marginRight: 15}}>
-                  <Icon name="build" size={30} />
+                  <Icon name="account-box" size={30} />
                 </View>
-                <Text
-                  style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                   Ubah Sandi
                 </Text>
               </TouchableOpacity>
@@ -102,18 +101,17 @@ export class Profil extends Component {
                 <View style={{margin: 5, marginRight: 15}}>
                   <Icon name="build" size={30} />
                 </View>
-                <Text
-                  style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
                   Edit Profil
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.styleProfil}>
                 <View style={{margin: 5, marginRight: 15}}>
-                  <Icon name="build" size={30} />
+                  <Icon name="admin-panel-settings" size={30} />
                 </View>
                 <Text
                   onPress={() => this.props.navigation.navigate('LupPass')}
-                  style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>
+                  style={{fontSize: 20, fontWeight: 'bold'}}>
                   Lupa Password
                 </Text>
               </TouchableOpacity>

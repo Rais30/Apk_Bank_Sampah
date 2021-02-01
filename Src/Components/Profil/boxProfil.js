@@ -42,14 +42,15 @@ export default StyleSheet.create({
     marginVertical: 50,
   },
   styleProfil: {
-    margin: 5,
+    marginVertical: 5,
     borderRadius: 5,
     // justifyContent: 'center',
     padding: 5,
-    backgroundColor: '#4caf50',
+    // backgroundColor: '#4caf50',
     height: 50,
     alignItems: 'center',
     flexDirection: 'row',
+    borderBottomWidth: 1,
   },
   boxSetting: {
     marginTop: 25,

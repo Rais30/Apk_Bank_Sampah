@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
-  TouchableNativeFeedback,
 } from 'react-native';
 import styles from '../../Components/Home/BoxHome';
 
@@ -56,17 +55,18 @@ export class Home2 extends Component {
   render() {
     return (
       <View style={styles.utama}>
-        <View style={styles.headers}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer()}
-            style={{...styles.boxgambar, marginRight: '68%'}}>
-            <Image
-              source={require('../../Assets/fotoLogo/recycle-icon-5.jpg')}
-              style={styles.gambar}
-            />
-          </TouchableOpacity>
-        </View>
         <ScrollView>
+          <View style={styles.headers}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer()}
+              style={{...styles.boxgambar, marginRight: '68%'}}>
+              <Image
+                source={require('../../Assets/fotoLogo/recycle-icon-5.jpg')}
+                style={styles.gambar}
+              />
+            </TouchableOpacity>
+          </View>
+
           <View style={styles.head}>
             <View style={styles.dataKu}>
               <View>

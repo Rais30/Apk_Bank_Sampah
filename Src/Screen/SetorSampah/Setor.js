@@ -25,6 +25,7 @@ class SetorP1 extends Component {
       idSampah: '',
       hargaSampah: '',
       email: '',
+      loading1: false,
     };
   }
   componentDidMount() {
@@ -62,14 +63,15 @@ class SetorP1 extends Component {
       });
   }
   SetorPenjemputan() {
+    console.log('setor');
     const {idSampah, berat, email} = this.state;
     const data = {
       jenis_sampah: idSampah,
       berat: berat,
       email: email,
     };
-    const url = `https://sammpah.herokuapp.com/api/setor`;
-    this.setState({loading: true});
+    const url = `https://sammpah.herokuapp.com/api/setorDriver/20/${this.props.route.params.user_id}/${this.props.route.params.id}`;
+    this.setState({loading1: true});
     fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
@@ -91,13 +93,13 @@ class SetorP1 extends Component {
             // console.log(resJson),
             this.props.navigation.navigate('Home1'),
           );
-          this.setState({loading: false});
+          this.setState({loading1: false});
         } else {
           console.log(error);
-          this.setState({loading: false});
+          this.setState({loading1: false});
         }
       })
-      .catch((err) => console.log(err), this.setState({loading: false}));
+      .catch((err) => console.log(err), this.setState({loading1: false}));
   }
   DataSampah() {
     return (
@@ -229,18 +231,22 @@ class SetorP1 extends Component {
                 />
               </View>
               <TouchableNativeFeedback onPress={() => this.SetorPenjemputan()}>
-                <View
-                  style={{
-                    marginVertical: 50,
-                    alignSelf: 'center',
-                    padding: 5,
-                    backgroundColor: '#00c853',
-                    borderRadius: 7,
-                  }}>
-                  <Text style={{fontSize: 25, color: 'white'}}>
-                    Setor Sampah
-                  </Text>
-                </View>
+                {this.state.loading1 ? (
+                  <ActivityIndicator size={35} color="red" />
+                ) : (
+                  <View
+                    style={{
+                      marginVertical: 50,
+                      alignSelf: 'center',
+                      padding: 5,
+                      backgroundColor: '#00c853',
+                      borderRadius: 7,
+                    }}>
+                    <Text style={{fontSize: 25, color: 'white'}}>
+                      Setor Sampah
+                    </Text>
+                  </View>
+                )}
               </TouchableNativeFeedback>
             </View>
           </ScrollView>

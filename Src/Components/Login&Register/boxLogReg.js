@@ -30,7 +30,7 @@ export default StyleSheet.create({
   tombolKlik: {
     width: '70%',
     height: 50,
-    backgroundColor: '#306EFF',
+    backgroundColor: '#388e3c',
     alignSelf: 'center',
     borderRadius: 25,
     marginTop: 100,

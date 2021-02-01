@@ -21,6 +21,7 @@ export class Home extends Component {
       email: '',
       data: [],
       user: '',
+      name: '',
     };
   }
   componentDidMount() {
@@ -33,7 +34,30 @@ export class Home extends Component {
       // console.log(name);
       this.saldoKu(token);
       this.histori(token);
+      this.Profil(token);
     });
+  }
+  Profil(token) {
+    console.log('get profile');
+    const url = 'https://sammpah.herokuapp.com/api/profile';
+    this.setState({loading: true});
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        Accept: 'aplication/json',
+        'Content-Type': 'aplication/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((respon) => respon.json())
+      .then((resJson) => {
+        this.setState({name: resJson.data.name, loading: false});
+        console.log(this.state.name);
+      })
+      .catch((error) => {
+        console.log('error is' + error);
+        this.setState({loading: false});
+      });
   }
   saldoKu(token) {
     console.log('memuali get saldo');
@@ -132,40 +156,47 @@ export class Home extends Component {
   render() {
     return (
       <View style={styles.utama}>
-        <View style={styles.headers}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer()}
-            style={{...styles.boxgambar, marginRight: '68%'}}>
-            <Image
-              source={require('../../Assets/fotoLogo/recycle-icon-5.jpg')}
-              style={styles.gambar}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Kontak')}
-            style={styles.IconHead}>
-            <Image
-              source={require('../../Assets/fotoLogo/icons8-new-contact-100.png')}
-              style={{width: 40, height: 40}}
-            />
-          </TouchableOpacity>
-        </View>
         <ScrollView>
+          <View style={styles.headers}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer()}
+              style={{...styles.boxgambar, marginRight: '68%'}}>
+              <Image
+                source={require('../../Assets/fotoLogo/recycle-icon-5.jpg')}
+                style={styles.gambar}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Kontak')}
+              style={styles.IconHead}>
+              <Image
+                source={require('../../Assets/fotoLogo/icons8-new-contact-100.png')}
+                style={{width: 40, height: 40}}
+              />
+            </TouchableOpacity>
+          </View>
+
           <View style={styles.head}>
             <View style={styles.dataKu}>
-              <View>
-                <Text style={{fontSize: 25, fontWeight: 'bold'}}>
-                  Rais Azaria Aryguna
-                </Text>
-              </View>
-              <View>
-                <Text style={{fontSize: 18}}> Nasabah </Text>
-              </View>
+              {this.state.name == '' ? (
+                <View></View>
+              ) : (
+                <View>
+                  <View>
+                    <Text style={{fontSize: 25, fontWeight: 'bold'}}>
+                      {this.state.name}
+                    </Text>
+                  </View>
+                  <View>
+                    <Text style={{fontSize: 18}}> Nasabah </Text>
+                  </View>
+                </View>
+              )}
             </View>
           </View>
           <View style={styles.box}>
             <ImageBackground
-              source={require('../../Assets/fotoLogo/wallpaperwiki Abstract Green Wallpaper HD PIC WPC002317.jpg')}
+              // source={require('../../Assets/fotoLogo/wallpaperwiki Abstract Green Wallpaper HD PIC WPC002317.jpg')}
               style={{width: '100%'}}>
               <View style={styles.boxsaldo}>
                 <View style={styles.saldo}>
@@ -204,6 +235,21 @@ export class Home extends Component {
                   </View>
                   <View style={styles.fitur}>
                     <TouchableOpacity
+                      onPress={() => this.props.navigation.navigate('Lokasi')}
+                      style={styles.boxFitur}>
+                      <Image
+                        source={require('../../Assets/fotoLogo/icons8-warehouse-100.png')}
+                        style={{height: 65, width: 65}}
+                      />
+                    </TouchableOpacity>
+                    <View style={{marginBottom: 5}}>
+                      <Text style={{color: 'white', fontWeight: 'bold'}}>
+                        setor sampah
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={styles.fitur}>
+                    <TouchableOpacity
                       onPress={() => this.props.navigation.navigate('Tabungan')}
                       style={styles.boxFitur}>
                       <Image
@@ -234,6 +280,21 @@ export class Home extends Component {
                       </Text>
                     </View>
                   </View>
+                  <View style={styles.fitur}>
+                    <TouchableOpacity
+                      onPress={() => this.props.navigation.navigate('Lokasi')}
+                      style={styles.boxFitur}>
+                      <Image
+                        source={require('../../Assets/fotoLogo/icons8-order-history-96-2.png')}
+                        style={{height: 65, width: 65}}
+                      />
+                    </TouchableOpacity>
+                    <View style={{marginBottom: 5}}>
+                      <Text style={{color: 'white', fontWeight: 'bold'}}>
+                        Tarik saldo
+                      </Text>
+                    </View>
+                  </View>
                 </ScrollView>
               </View>
             </ImageBackground>
@@ -241,7 +302,7 @@ export class Home extends Component {
           <View>
             <View style={styles.tittel}>
               <Text style={{fontSize: 17, fontWeight: 'bold', color: 'white'}}>
-                Riwanyat Penyetoran Sampah
+                Histori Penyetoran Sampah
               </Text>
             </View>
             <View>

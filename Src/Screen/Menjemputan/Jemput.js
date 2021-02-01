@@ -173,11 +173,8 @@ export class Jemput extends Component {
         </View>
         <ScrollView>
           {this.state.data == null ? (
-            <View>
-              <ActivityIndicator size={30} color="red" />
-              <View style={{alignSelf: 'center'}}>
-                <Text> Periksa Jaringan Anda </Text>
-              </View>
+            <View style={{alignSelf: 'center'}}>
+              <Text> Tidak Ada Data </Text>
             </View>
           ) : (
             <View>

@@ -69,17 +69,11 @@ export class TarikSaldo extends Component {
         } else if (message == 'Saldo Anda Tidak Cukup') {
           this.setState({loading: false});
           this.setState({modal: true});
-          return (
-            <Modal
-              style={styles.modal}
-              transparent={true}
-              animationType="slide"
-              visible={this.state.modal}
-              onRequestClose={() => this.setState({modal: false})}>
-              <Text style={{fontSize: 20}}>
-                Mohon aaf Periksa Kembali Saldo Anda
-              </Text>
-            </Modal>
+          ToastAndroid.show(
+            ' Saldo Tidak Cukup',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+            console.log(resJson),
           );
         } else {
           this.setState({loading: false});
@@ -119,6 +113,9 @@ export class TarikSaldo extends Component {
                 keyboardType="number-pad"
                 onChangeText={(teks) => this.setState({nominal: teks})}
               />
+            </View>
+            <View style={{...styles.Input, justifyContent: 'center'}}>
+              <Text>ADMIN Rp.3000</Text>
             </View>
           </View>
           <TouchableNativeFeedback onPress={() => this.penarikan()}>
