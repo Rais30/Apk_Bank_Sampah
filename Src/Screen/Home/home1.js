@@ -67,7 +67,7 @@ export class Home1 extends Component {
             </View>
           </View>
           <View style={styles.box}>
-            <View style={{alignItems: 'center', marginBottom: 5}}>
+            <View style={{width: '100%', alignItems: 'center'}}>
               <ScrollView horizontal={true}>
                 <View style={{margin: 5}}>
                   <TouchableOpacity

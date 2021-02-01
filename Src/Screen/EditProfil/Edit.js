@@ -100,7 +100,6 @@ export class EditProfile extends Component {
             ToastAndroid.SHORT,
             ToastAndroid.CENTER,
             console.log(resJson),
-            this.props.navigation.replace('Rumah', {screen: 'Profil'}),
           );
           this.setState({loading: false});
           // this.props.navigation.navigate('Home');

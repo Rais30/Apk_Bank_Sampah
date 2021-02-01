@@ -50,11 +50,10 @@ export class EditPass extends Component {
         const {status} = resJson;
         if (status == 'Success') {
           ToastAndroid.show(
-            ' Berhasil',
+            ' Password Berasil Di Ubah',
             ToastAndroid.SHORT,
             ToastAndroid.CENTER,
             console.log(resJson),
-            this.props.navigation.replace('Rumah', {screen: 'Profil'}),
           );
           this.setState({loading: false});
           // this.props.navigation.navigate('Home');
@@ -94,7 +93,7 @@ export class EditPass extends Component {
         <View style={{...styles.head, marginBottom: 50}}>
           <Text style={{fontSize: 35}}> Ubah Password</Text>
         </View>
-        <ScrollView>
+        <ScrollView refreshControl>
           <View style={styles.box}>
             <View style={{flexDirection: 'row'}}>
               <View
